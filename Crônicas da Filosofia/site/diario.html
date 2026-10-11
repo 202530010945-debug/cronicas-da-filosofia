@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crônicas da Filosofia — Diário</title>
+<style>
+:root{--gold:#d7b35b;--pale:#f4dfac;--ink:#06101b;--line:#8e6b2d;--muted:#bdb8aa}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#030811;color:var(--pale);font-family:Georgia,"Times New Roman",serif}
+body{padding:16px;background:radial-gradient(ellipse at 50% 0%,#1a2c3f 0%,#050b14 58%,#02050a 100%)}
+button,textarea{font:inherit}.shell{max-width:1180px;margin:auto;border:1px solid #a27c37;background:#06101b;box-shadow:0 0 0 3px #080e17,0 0 32px #000}
+header{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 24px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,#08121f,#172333,#08121f)}
+.brand{display:flex;align-items:center;gap:15px}.book{width:54px;height:64px;display:grid;place-items:center;font-size:30px;border:1px solid var(--gold);background:linear-gradient(135deg,#392d1b,#0a1320);box-shadow:inset 0 0 0 3px #d7b35b18}.eyebrow{font:10px Arial,sans-serif;letter-spacing:3px;color:#c6a65a;text-transform:uppercase;margin:0 0 6px}h1{font-size:clamp(23px,4vw,34px);font-weight:normal;margin:0;color:#fff0c8}header p.sub{color:#c8c2b4;font-size:13px;margin:7px 0 0}button{cursor:pointer}.back{border:1px solid var(--line);background:#0a1724;color:var(--pale);padding:11px 15px}.back:hover,.tab:hover{border-color:#f4dfac;background:#172638}
+main{padding:22px}.intro{padding:18px 20px;margin-bottom:18px;border:1px solid #6f552b;background:linear-gradient(120deg,#101e2c,#09131f);position:relative}.intro:after{content:"✦";position:absolute;right:20px;top:18px;color:#b58a32;font-size:24px}.intro h2{font-size:18px;font-weight:normal;color:#f3d98e;margin:0 0 8px}.intro p{font-size:14px;line-height:1.65;color:#d5d0c4;margin:0;max-width:850px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}.tab{padding:11px 15px;border:1px solid #755a2d;color:#dfc987;background:#0a1522}.tab.active{background:linear-gradient(100deg,#8f6928,#d7b35b,#8f6928);color:#10101a;border-color:#f4dfac;font-weight:bold}
+.layout{display:grid;grid-template-columns:300px minmax(0,1fr);gap:16px}.panel{border:1px solid var(--line);background:linear-gradient(145deg,#0d1a28,#050c15);min-width:0}.panel-title{padding:14px 16px;border-bottom:1px solid #6f552b;color:#f3d98e;text-transform:uppercase;letter-spacing:1.5px;font-size:12px}.entry-list{padding:10px;display:grid;gap:8px}.entry{width:100%;text-align:left;border:1px solid #3f3b30;background:#09131e;color:#e9dfc7;padding:12px;display:flex;gap:10px;align-items:flex-start}.entry .symbol{color:#d7b35b;font-size:18px}.entry strong{display:block;font-weight:normal;font-size:14px}.entry small{display:block;color:#a9a69d;font:11px Arial,sans-serif;margin-top:5px}.entry.selected{border-color:#d7b35b;background:#172333;box-shadow:inset 3px 0 #d7b35b}.entry.locked{opacity:.55;cursor:default}.content{padding:22px;min-height:370px}.content .tag{color:#c5a85e;text-transform:uppercase;font:10px Arial,sans-serif;letter-spacing:2px}.content h2{font-size:27px;font-weight:normal;color:#fff0c8;margin:10px 0}.content .meta{color:#a9a69d;font:12px Arial,sans-serif;border-bottom:1px solid #4e4129;padding-bottom:14px}.content p{font-size:15px;line-height:1.8;color:#ddd7ca}.quote{margin:20px 0;padding:14px 18px;border-left:2px solid #d7b35b;background:#111e2b;color:#f1dca0;font-style:italic;line-height:1.7}.note-label{display:block;color:#e2ca83;font-size:13px;margin:20px 0 8px}.note{width:100%;min-height:110px;resize:vertical;background:#050c15;border:1px solid #66512d;color:#f4dfac;padding:12px;line-height:1.6;outline:none}.note:focus{border-color:#f4dfac}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}.action{border:1px solid #987536;background:linear-gradient(100deg,#172333,#0b1521);color:#f0dca4;padding:10px 14px}.action.primary{background:linear-gradient(100deg,#8f6928,#d7b35b);color:#10101a;font-weight:bold}.status{font-size:12px;color:#c8b16f;margin-top:10px;min-height:16px}.empty{padding:25px;color:#bdb8aa;line-height:1.7}.footer{padding:13px;text-align:center;color:#8e8b84;font:10px Arial,sans-serif;letter-spacing:2px;border-top:1px solid #47371e}
+@media(max-width:760px){body{padding:5px}header{padding:15px;align-items:flex-start}.book{width:43px;height:52px}.back{padding:9px;font-size:12px}main{padding:10px}.layout{grid-template-columns:1fr}.entry-list{grid-template-columns:repeat(2,minmax(0,1fr))}.entry{padding:9px}.content{padding:16px;min-height:280px}.content h2{font-size:23px}}
+@media(max-width:440px){header{flex-direction:column}.entry-list{grid-template-columns:1fr}.intro:after{display:none}.tab{flex:1;padding:10px 6px;font-size:12px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header>
+  <div class="brand"><div class="book">📖</div><div><p class="eyebrow">Crônicas da Filosofia</p><h1>Diário de Jornada</h1><p class="sub" id="welcome">As páginas da sua aventura filosófica.</p></div></div>
+  <button class="back" id="voltar">↩ Voltar ao mapa</button>
+</header>
+<main>
+  <section class="intro"><h2>“Conhecer é também aprender a perguntar.”</h2><p>Este é o registro das suas descobertas. Consulte os acontecimentos da jornada, relembre os conceitos filosóficos e escreva suas próprias reflexões. Suas anotações ficam salvas neste navegador.</p></section>
+  <nav class="tabs" aria-label="Seções do diário"><button class="tab active" data-tab="cronicas">✦ Crônicas</button><button class="tab" data-tab="filosofia">⌘ Conhecimento</button><button class="tab" data-tab="missoes">⚑ Missões</button><button class="tab" data-tab="recompensas">✧ Recompensas</button><button class="tab" data-tab="anotacoes">✎ Minhas anotações</button></nav>
+  <div class="layout">
+    <aside class="panel"><div class="panel-title" id="listTitle">Registros da jornada</div><div class="entry-list" id="entries"></div></aside>
+    <section class="panel"><div class="panel-title" id="detailLabel">Página do diário</div><article class="content" id="detail"></article></section>
+  </div>
+</main>
+<div class="footer">CADA PERGUNTA ABRE UM CAMINHO · CADA IDEIA DEIXA UMA MARCA</div>
+</div>
+<script>
+const get = key => localStorage.getItem(key);
+const done = key => ['sim','true','1'].includes(get(key));
+const sections = {
+ cronicas:[
+  {id:'inicio',icon:'✧',title:'O chamado da aventura',sub:'O início da jornada',tag:'Prólogo',body:'Uma jornada extraordinária começa quando alguém decide olhar para o mundo com curiosidade. Entre ruínas antigas, cidades misteriosas e perguntas difíceis, o viajante descobrirá que pensar pode ser tão poderoso quanto qualquer espada.',quote:'Toda grande descoberta começa com uma pergunta.'},
+  {id:'grecia',icon:'⌂',title:'Grécia Antiga',sub:'O berço da Filosofia',key:'regiaoGreciaConcluida',tag:'Região I · Grécia Antiga',body:'Nas cidades da Grécia Antiga, pensadores começaram a buscar explicações racionais para a natureza, a vida e a organização da sociedade. Em vez de aceitar apenas as tradições, passaram a observar, questionar e argumentar.',quote:'A filosofia nasce quando deixamos de apenas aceitar e começamos a perguntar.'},
+  {id:'reino',icon:'▤',title:'Reino do Conhecimento',sub:'Como sabemos o que sabemos?',key:'reinoConhecimentoConcluido',tag:'Região II · Reino do Conhecimento',body:'Nesta região, o viajante investiga o conhecimento: de onde vêm nossas ideias, como podemos distinguir opinião e saber e quais são os limites daquilo que conseguimos conhecer.',quote:'Uma mente curiosa não teme perguntas; aprende a examiná-las.'},
+  {id:'cidade',icon:'⌘',title:'Cidade das Ideias',sub:'O mundo das ideias e da razão',key:'cidadeIdeiasConcluida',tag:'Região III · Cidade das Ideias',body:'Entre praças e bibliotecas, surgem debates sobre justiça, verdade, realidade e o que torna uma vida boa. As ideias não são apenas respostas prontas: são caminhos que precisam ser examinados.',quote:'Pensar é atravessar a aparência em busca de compreensão.'},
+  {id:'terras',icon:'✺',title:'Terras das Grandes Questões',sub:'Perguntas que atravessam os séculos',key:'terrasGrandesQuestoesConcluida',tag:'Região IV · Terras das Grandes Questões',body:'Aqui, as perguntas ficam ainda maiores: o que é liberdade? O que torna uma ação justa? Existe um sentido para a vida? Diferentes filósofos oferecem caminhos, mas cabe ao viajante construir seus argumentos.',quote:'Nem toda pergunta exige uma resposta imediata; algumas ensinam a pensar melhor.'}
+ ],
+ filosofia:[
+  {id:'mito',icon:'☼',title:'Do mito à razão',sub:'Uma nova forma de explicar o mundo',tag:'Conceito filosófico',body:'O pensamento mítico explica o mundo por meio de narrativas tradicionais, muitas vezes com deuses e seres sobrenaturais. A Filosofia começa a desenvolver explicações baseadas na razão, na observação e na argumentação. Isso não aconteceu de uma hora para outra: diferentes formas de pensamento conviveram.',quote:'A mudança essencial é começar a pedir razões para aquilo em que acreditamos.'},
+  {id:'socrates',icon:'?',title:'Sócrates e o questionamento',sub:'Examinar as próprias ideias',tag:'Filósofo · Sócrates',body:'Sócrates ficou conhecido por dialogar e fazer perguntas que ajudavam as pessoas a examinar suas próprias crenças. Em vez de entregar respostas prontas, investigava definições e contradições. Sua atitude mostra que reconhecer o que não sabemos pode ser o começo do aprendizado.',quote:'Uma boa pergunta pode revelar o que uma resposta apressada esconde.'},
+  {id:'platao',icon:'◇',title:'Platão e o mundo das ideias',sub:'A diferença entre aparência e realidade',tag:'Filósofo · Platão',body:'Platão investigou a diferença entre aquilo que percebemos pelos sentidos e aquilo que compreendemos pelo pensamento. Na alegoria da caverna, pessoas confundem sombras com a realidade porque nunca viram outra coisa. A história convida a questionar aparências e buscar conhecimento.',quote:'Será que aquilo que vemos é tudo o que existe?'}
+ ],
+ missoes:[
+  {id:'m-grecia',icon:'♜',title:'Explorar a Grécia Antiga',sub:'Primeira região',key:'regiaoGreciaConcluida',tag:'Missão de exploração',body:'Visite a região da Grécia Antiga e conclua seus desafios para registrar oficialmente essa etapa da jornada.',quote:'Estado: ' + (done('regiaoGreciaConcluida')?'Missão concluída.':'Missão ainda não concluída.')},
+  {id:'m-reino',icon:'▤',title:'Desvendar o conhecimento',sub:'Reino do Conhecimento',key:'reinoConhecimentoConcluido',tag:'Missão de exploração',body:'Investigue as perguntas sobre conhecimento e conclua os desafios da região para avançar.',quote:'Estado: ' + (done('reinoConhecimentoConcluido')?'Missão concluída.':'Missão ainda não concluída.')},
+  {id:'m-cidade',icon:'⌘',title:'Investigar as ideias',sub:'Cidade das Ideias',key:'cidadeIdeiasConcluida',tag:'Missão de exploração',body:'Explore os debates e conceitos da Cidade das Ideias. Suas descobertas ficarão registradas aqui.',quote:'Estado: ' + (done('cidadeIdeiasConcluida')?'Missão concluída.':'Missão ainda não concluída.')},
+  {id:'m-terras',icon:'✺',title:'Enfrentar as grandes questões',sub:'Última região do percurso',key:'terrasGrandesQuestoesConcluida',tag:'Missão de exploração',body:'Encare as perguntas filosóficas finais e conclua os desafios das Terras das Grandes Questões.',quote:'Estado: ' + (done('terrasGrandesQuestoesConcluida')?'Missão concluída.':'Missão ainda não concluída.')}
+ ],
+ anotacoes:[{id:'minhas',icon:'✎',title:'Minhas reflexões',sub:'Uma página só sua',tag:'Caderno pessoal',body:'Use este espaço para registrar ideias, dúvidas e reflexões que surgirem durante a aventura.'}],
+ recompensas:[
+  {id:'r-grecia',icon:'🏺',title:'Aprendiz da Razão',sub:'Relíquia: Moeda de Atena',key:'regiaoGreciaConcluida',tag:'Recompensa · Região I',body:'Você aprendeu a procurar explicações racionais para o mundo e a transformar curiosidade em investigação.',quote:'Mensagem especial: “Toda grande jornada começa quando você tem coragem de perguntar.”'},
+  {id:'r-reino',icon:'🔮',title:'Guardião do Conhecimento',sub:'Relíquia: Cristal da Sabedoria',key:'reinoConhecimentoConcluido',tag:'Recompensa · Região II',body:'Você examinou as fontes e os limites do conhecimento. O Cristal da Sabedoria simboliza sua disposição para distinguir opinião, evidência e argumento.',quote:'Mensagem especial: “Saber que ainda há muito a aprender também é uma forma de sabedoria.”'},
+  {id:'r-cidade',icon:'📜',title:'Explorador das Ideias',sub:'Relíquia: Pergaminho de Platão',key:'cidadeIdeiasConcluida',tag:'Recompensa · Região III',body:'Você enfrentou debates sobre verdade, justiça e realidade. O Pergaminho de Platão lembra que nem tudo é tão simples quanto parece à primeira vista.',quote:'Mensagem especial: “Continue olhando além das aparências; pensar é uma aventura.”'},
+  {id:'r-terras',icon:'⭐',title:'Mestre das Grandes Questões',sub:'Relíquia: Estrela da Reflexão',key:'terrasGrandesQuestoesConcluida',tag:'Recompensa · Região IV',body:'Você encarou questões sobre felicidade, liberdade e a maneira de viver. A Estrela da Reflexão representa sua capacidade de construir argumentos e considerar diferentes caminhos.',quote:'Mensagem especial: “Você não precisa ter todas as respostas para continuar pensando com coragem.”'}
+ ]
+};
+let tab='cronicas', selected='inicio';
+const entriesEl=document.getElementById('entries'), detail=document.getElementById('detail');
+function entries(){return sections[tab]}
+function isLocked(item){return !!item.key && !done(item.key)}
+function renderList(){
+ document.getElementById('listTitle').textContent=({cronicas:'Registros da jornada',filosofia:'Biblioteca filosófica',missoes:'Quadro de missões',recompensas:'Salão de recompensas',anotacoes:'Caderno pessoal'})[tab];
+ entriesEl.innerHTML='';
+ entries().forEach(item=>{const locked=isLocked(item);const b=document.createElement('button');b.className='entry'+(selected===item.id?' selected':'')+(locked?' locked':'');b.innerHTML=`<span class="symbol">${locked?'🔒':item.icon}</span><span><strong>${item.title}</strong><small>${locked?'Descubra ao avançar':item.sub}</small></span>`;b.disabled=locked;b.addEventListener('click',()=>{selected=item.id;renderList();renderDetail()});entriesEl.appendChild(b)});
+}
+function renderDetail(){
+ const item=entries().find(x=>x.id===selected)||entries()[0]; if(!item){detail.innerHTML='<p>Nenhuma página disponível.</p>';return}
+ const isNotes=tab==='anotacoes';
+ detail.innerHTML=`<div class="tag">${item.tag||'Registro'}</div><h2>${item.title}</h2><div class="meta">${item.sub||''}</div><p>${item.body||''}</p>${item.quote?`<div class="quote">“${item.quote.replace(/^“|”$/g,'')}”</div>`:''}${isNotes?'<label class="note-label" for="note">Escreva suas reflexões</label><textarea class="note" id="note" placeholder="O que você descobriu? Que perguntas ficaram na sua mente?..."></textarea><div class="actions"><button class="action primary" id="saveNote">✦ Salvar anotação</button><button class="action" id="clearNote">Apagar texto</button></div><div class="status" id="status" aria-live="polite"></div>':''}`;
+ if(isNotes){const area=document.getElementById('note');area.value=get('diarioAnotacoes')||'';document.getElementById('saveNote').addEventListener('click',()=>{localStorage.setItem('diarioAnotacoes',area.value);document.getElementById('status').textContent='✦ Anotação salva neste navegador.'});document.getElementById('clearNote').addEventListener('click',()=>{area.value='';localStorage.removeItem('diarioAnotacoes');document.getElementById('status').textContent='Texto apagado.'})}
+}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{tab=b.dataset.tab;selected=entries()[0].id;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));document.getElementById('detailLabel').textContent=b.textContent.replace(/^[^A-Za-zÀ-ÿ]+/,'');renderList();renderDetail()}));
+document.getElementById('voltar').addEventListener('click',()=>{window.location.href='mapa.html'});
+const nome=get('nomeJogador');if(nome)document.getElementById('welcome').textContent='As descobertas de '+nome+' ficam registradas nestas páginas.';
+renderList();renderDetail();
+</script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Travessia para Logos | Crônicas da Filosofia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #070b14;
+      color: #f2e5c5;
+      font-family: Georgia, serif;
+    }
+
+    .cena {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 30px 18px;
+      position: relative;
+      background:
+        linear-gradient(0deg, #070b14 0%, #070b14f2 18%, #070b1499 65%, #070b14b0 100%),
+        url("mapa-fantasia.png") center / cover no-repeat,
+        #101a2a;
+    }
+
+    .moldura {
+      width: min(100%, 900px);
+      border: 1px solid #c7a34b;
+      padding: 10px;
+      background: #090e19dc;
+      box-shadow: 0 20px 80px #0009;
+    }
+
+    .conteudo {
+      border: 1px solid #68572e;
+      padding: clamp(22px, 5vw, 48px);
+      text-align: center;
+    }
+
+    .rotulo {
+      color: #d9b85f;
+      font-size: 10px;
+      letter-spacing: 4px;
+      margin: 0 0 20px;
+    }
+
+    h1 {
+      font-size: clamp(30px, 6vw, 48px);
+      line-height: 1.15;
+      margin: 0 0 25px;
+      color: #f5e4b5;
+    }
+
+    .retrato {
+      width: 100px;
+      height: 100px;
+      border: 2px solid #c9a653;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #141b29;
+      margin-bottom: 14px;
+      box-shadow: 0 0 25px #c9a65326;
+    }
+
+    .nome {
+      color: #e5c66e;
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin-bottom: 25px;
+    }
+
+    .texto {
+      max-width: 690px;
+      margin: 0 auto;
+      color: #d7d0c2;
+      font-size: clamp(16px, 2.3vw, 19px);
+      line-height: 1.95;
+      text-align: left;
+      min-height: 145px;
+      white-space: pre-line;
+    }
+
+    .divisor {
+      color: #c9a653;
+      margin: 25px 0;
+      letter-spacing: 8px;
+    }
+
+    .avancar {
+      min-width: min(100%, 280px);
+      margin-top: 10px;
+      padding: 16px 22px;
+      border: 1px solid #e1c36f;
+      background: linear-gradient(110deg, #a87e2c, #ecd58e, #a87e2c);
+      color: #12111a;
+      font-family: Georgia, serif;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .avancar:hover {
+      filter: brightness(1.12);
+      transform: translateY(-2px);
+    }
+
+    .contador {
+      color: #938d82;
+      font: 10px Arial, sans-serif;
+      letter-spacing: 2px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 500px) {
+      .conteudo { padding: 25px 18px; }
+      .texto { min-height: 190px; }
+      .rotulo { letter-spacing: 2px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="cena">
+    <section class="moldura">
+      <div class="conteudo">
+        <p class="rotulo">CRÔNICAS DA FILOSOFIA · PRÓLOGO</p>
+
+        <h1 id="titulo-cena">A Travessia para Logos</h1>
+
+        <img id="retrato" class="retrato" alt="Retrato do protagonista" hidden>
+
+        <p class="nome" id="nome-personagem"></p>
+
+        <p class="texto" id="texto-cena"></p>
+
+        <p class="divisor">✧ ───── ✦ ───── ✧</p>
+
+        <button class="avancar" id="avancar">CONTINUAR →</button>
+
+        <p class="contador" id="contador"></p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const nomeSalvo = localStorage.getItem("nomeJogador") || "Viajante";
+    const personagemSalvo = localStorage.getItem("personagemEscolhido");
+
+    const cenas = [
+      {
+        titulo: "Um mundo além do conhecido",
+        texto: "Há lugares que não aparecem em mapas comuns. Mundos escondidos entre perguntas, sonhos e ideias esquecidas pelo tempo.\n\nNaquela noite, uma passagem misteriosa se abriu diante de você."
+      },
+      {
+        titulo: "O chamado de Logos",
+        texto: "Uma luz dourada atravessou a escuridão. Do outro lado, ruínas antigas flutuavam sob um céu repleto de constelações desconhecidas.\n\nVocê havia chegado a Logos: um mundo onde o conhecimento tem poder e cada pergunta pode mudar o destino."
+      },
+      {
+        titulo: "A primeira escolha",
+        texto: "O vento percorreu as colunas de pedra. Ao longe, uma voz serena ecoou:\n\n“Viajante, não é a força que revela os mistérios deste mundo, mas a coragem de questionar. Caminhe, observe e não aceite toda resposta sem pensar.”\n\nSua jornada filosófica está prestes a começar."
+      }
+    ];
+
+    let cenaAtual = 0;
+
+    const titulo = document.getElementById("titulo-cena");
+    const texto = document.getElementById("texto-cena");
+    const botao = document.getElementById("avancar");
+    const contador = document.getElementById("contador");
+    const nomeElemento = document.getElementById("nome-personagem");
+    const retrato = document.getElementById("retrato");
+
+    nomeElemento.textContent = nomeSalvo.toUpperCase();
+
+    if (personagemSalvo) {
+      // O valor salvo pode ser um caminho de imagem ou um identificador.
+      // Só tentamos exibir valores que pareçam caminhos de arquivo.
+      if (/\.(png|jpe?g|webp|gif)(\?.*)?$/i.test(personagemSalvo)) {
+        retrato.src = personagemSalvo;
+        retrato.hidden = false;
+        retrato.onerror = function() {
+          retrato.hidden = true;
+        };
+      }
+    }
+
+    function mostrarCena() {
+      const cena = cenas[cenaAtual];
+      titulo.textContent = cena.titulo;
+      texto.textContent = cena.texto;
+      contador.textContent = "PRÓLOGO · " + (cenaAtual + 1) + " / " + cenas.length;
+
+      botao.textContent = cenaAtual === cenas.length - 1
+        ? "ENTRAR NO MUNDO →"
+        : "CONTINUAR →";
+    }
+
+    botao.addEventListener("click", function() {
+      if (cenaAtual < cenas.length - 1) {
+        cenaAtual++;
+        mostrarCena();
+      } else {
+        window.location.href = "sofia.html";
+      }
+    });
+
+    mostrarCena();
+  </script>
+</body>
+</html>

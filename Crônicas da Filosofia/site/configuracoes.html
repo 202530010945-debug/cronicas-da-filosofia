@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Configurações | Crônicas da Filosofia</title>
+<style>
+:root{--gold:#d7b35b;--gold-light:#f4dfac;--ink:#06101b;--panel:rgba(4,12,22,.94);--line:#8e6b2d}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#030811;color:#f4dfac;font-family:Georgia,"Times New Roman",serif}
+body{padding:16px;background:radial-gradient(ellipse at 50% 0%,#1a2c3f 0%,#050b14 58%,#02050a 100%);font-size:16px}
+.shell{width:min(900px,100%);margin:0 auto;border:1px solid #a27c37;box-shadow:0 0 0 3px #080e17,0 0 32px #000;background:#06101b;min-height:calc(100vh - 32px)}
+header{text-align:center;padding:28px 20px 22px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,#08121f,#101a27,#08121f)}
+.eyebrow{font-size:11px;letter-spacing:4px;color:#c6a65a;text-transform:uppercase}h1{margin:10px 0 8px;font-size:clamp(25px,5vw,38px);letter-spacing:2px;color:#f4dfac}header p{margin:0;color:#c7c1b4;font-size:14px;line-height:1.5}
+main{padding:18px;display:grid;gap:14px}.card{border:1px solid var(--line);background:linear-gradient(145deg,rgba(11,22,35,.98),rgba(3,9,16,.98));padding:17px;box-shadow:inset 0 0 0 1px #d7b35b10}.card h2{font-size:17px;font-weight:normal;color:#f4d98f;margin:0 0 8px}.desc{font-size:13px;color:#c9c5bb;line-height:1.55;margin:0 0 14px}.setting{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid #72582e}.setting:first-of-type{border-top:0}.setting strong{display:block;font-size:14px;font-weight:normal;color:#f5e8c8}.setting small{display:block;color:#b9b6ae;font-size:12px;line-height:1.5;margin-top:4px}.switch{flex:0 0 auto;position:relative;width:48px;height:26px}.switch input{position:absolute;opacity:0;width:1px;height:1px}.slider{position:absolute;inset:0;cursor:pointer;border:1px solid #8e6b2d;border-radius:20px;background:#151d29;transition:.2s}.slider:before{content:"";position:absolute;width:18px;height:18px;left:3px;top:3px;border-radius:50%;background:#c4bca8;transition:.2s}.switch input:checked+.slider{background:#5a4824}.switch input:checked+.slider:before{transform:translateX(21px);background:#f4dfac}.switch input:focus-visible+.slider{outline:2px solid #fff0c8;outline-offset:3px}.actions{display:flex;flex-wrap:wrap;gap:8px}.btn{font:inherit;min-height:42px;padding:10px 14px;color:#f4dfac;border:1px solid #8e6b2d;background:linear-gradient(100deg,#091421,#111d2b);cursor:pointer}.btn:hover{background:#263348;border-color:#f1d58b}.btn.danger{border-color:#9d5145;color:#ffd2c9}.btn:focus-visible{outline:2px solid #f4dfac;outline-offset:2px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{border:1px solid #72582e;padding:12px;text-align:center;background:#050d17}.stat strong{display:block;font-size:22px;color:#f4dfac}.stat span{font-size:11px;color:#c5bda9}.status{min-height:18px;color:#d7b35b;font-size:12px;margin-top:10px}.bottom{display:flex;justify-content:center;padding:0 18px 20px}.muted{font-size:12px;color:#b9b6ae;line-height:1.5}@media(max-width:540px){body{padding:5px}.shell{min-height:calc(100vh - 10px)}main{padding:10px}.card{padding:13px}.stats{grid-template-columns:1fr}.setting{gap:10px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header><div class="eyebrow">Crônicas da Filosofia</div><h1>⚙ Configurações</h1><p>Personalize sua jornada sem perder as conquistas já feitas.</p></header>
+<main>
+<section class="card"><h2>✦ Aparência</h2><p class="desc">Ajustes simples para deixar a leitura mais confortável.</p>
+<div class="setting"><div><strong>Tela cheia</strong><small>Expandir o jogo para ocupar a tela. Pressione Esc para sair do modo de tela cheia.</small></div><button class="btn" id="fullscreen">Ativar tela cheia</button></div>
+<div class="setting"><div><strong>Texto maior</strong><small>Aumenta o tamanho dos textos desta tela.</small></div><label class="switch"><input id="textoMaior" type="checkbox"><span class="slider"></span></label></div>
+<div class="setting"><div><strong>Alto contraste</strong><small>Realça bordas e textos para facilitar a leitura nesta tela.</small></div><label class="switch"><input id="altoContraste" type="checkbox"><span class="slider"></span></label></div>
+</section>
+<section class="card"><h2>✦ Jogabilidade</h2><p class="desc">Essas preferências ficam salvas neste navegador.</p>
+<div class="setting"><div><strong>Dicas durante as missões</strong><small>Ativa a preferência para exibir dicas nas telas de missão que oferecem esse recurso.</small></div><label class="switch"><input id="dicasAtivas" type="checkbox"><span class="slider"></span></label></div>
+<div class="setting"><div><strong>Confirmar ações</strong><small>Perguntar antes de entrar em regiões e sair para a tela inicial.</small></div><label class="switch"><input id="confirmarAcoes" type="checkbox"><span class="slider"></span></label></div>
+</section>
+<section class="card"><h2>✦ Seu progresso</h2><p class="desc">Resumo das conquistas guardadas neste navegador.</p>
+<div class="stats"><div class="stat"><strong id="pontos">0</strong><span>Pontos de conhecimento</span></div><div class="stat"><strong id="regioes">0/4</strong><span>Regiões concluídas</span></div><div class="stat"><strong id="missoes">0</strong><span>Marcadores de missão</span></div></div>
+<p class="desc" style="margin-top:14px">Reiniciar remove os pontos e as marcações de progresso das regiões e missões. O nome do personagem e as preferências desta tela serão preservados.</p>
+<div class="actions"><button class="btn danger" id="reiniciar">Reiniciar progresso</button><button class="btn" id="voltar">← Voltar ao mapa</button></div><div class="status" id="status" role="status" aria-live="polite"></div>
+</section>
+<p class="muted">Áudio desativado por enquanto. Nenhuma música ou efeito sonoro será iniciado por esta tela.</p>
+</main>
+<div class="bottom"><button class="btn" id="inicio">⌂ Tela inicial</button></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const keys={dicasAtivas:'dicasAtivas',confirmarAcoes:'confirmarAcoes',textoMaior:'configTextoMaior',altoContraste:'configAltoContraste'};
+function loadSwitch(id,key,defaultValue=false){$(id).checked=localStorage.getItem(key)==='sim'||(localStorage.getItem(key)===null&&defaultValue)}
+function saveSwitch(id,key){$(id).addEventListener('change',()=>{localStorage.setItem(key,$(id).checked?'sim':'nao');if(id==='textoMaior')document.body.style.fontSize=$(id).checked?'18px':'16px';if(id==='altoContraste')document.body.classList.toggle('contrast',$(id).checked);$('status').textContent='Preferência salva.'})}
+loadSwitch('dicasAtivas',keys.dicasAtivas,true);loadSwitch('confirmarAcoes',keys.confirmarAcoes,false);loadSwitch('textoMaior',keys.textoMaior,false);loadSwitch('altoContraste',keys.altoContraste,false);
+const style=document.createElement('style');style.textContent='body.contrast .card{border-width:2px}body.contrast .desc,body.contrast .muted,body.contrast .setting small{color:#fff}';document.head.appendChild(style);
+if($('textoMaior').checked)document.body.style.fontSize='18px';if($('altoContraste').checked)document.body.classList.add('contrast');
+Object.entries(keys).forEach(([id,key])=>saveSwitch(id,key));
+$('fullscreen').addEventListener('click',async()=>{try{if(!document.fullscreenElement){await document.documentElement.requestFullscreen();$('fullscreen').textContent='Sair da tela cheia'}else{await document.exitFullscreen();$('fullscreen').textContent='Ativar tela cheia'}}catch(e){$('status').textContent='A tela cheia não está disponível neste navegador.'}});
+document.addEventListener('fullscreenchange',()=>$('fullscreen').textContent=document.fullscreenElement?'Sair da tela cheia':'Ativar tela cheia');
+const done=k=>['sim','true','1'].includes(localStorage.getItem(k));const regions=['regiaoGreciaConcluida','reinoConhecimentoConcluido','cidadeIdeiasConcluida','terrasGrandesQuestoesConcluida'];$('pontos').textContent=Number(localStorage.getItem('pontosFilosofia')||0);$('regioes').textContent=regions.filter(done).length+'/4';const missionKeys=['missao1Concluida','reinoPontosAdicionados','cidadePontosAdicionados'];$('missoes').textContent=missionKeys.filter(done).length;
+$('reiniciar').addEventListener('click',()=>{if(!confirm('Tem certeza de que deseja reiniciar o progresso? Essa ação remove pontos e regiões concluídas e não pode ser desfeita.'))return;['pontosFilosofia',...regions,'missao1Concluida','reinoPontosAdicionados','cidadePontosAdicionados'].forEach(k=>localStorage.removeItem(k));$('pontos').textContent='0';$('regioes').textContent='0/4';$('missoes').textContent='0';$('status').textContent='Progresso reiniciado. Seu personagem e suas preferências foram preservados.'});
+$('voltar').addEventListener('click',()=>window.location.href='mapa.html');$('inicio').addEventListener('click',()=>{if(localStorage.getItem('confirmarAcoes')==='sim'&&!confirm('Deseja voltar à tela inicial?'))return;window.location.href='index.html'});
+</script>
+</body>
+</html>

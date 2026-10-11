@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crônicas da Filosofia — Mapa do Mundo</title>
+<style>
+:root{--gold:#d7b35b;--gold-light:#f4dfac;--ink:#06101b;--panel:rgba(4,12,22,.94);--line:#8e6b2d}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#030811;color:#f4dfac;font-family:Georgia,"Times New Roman",serif}
+body{padding:14px;background:radial-gradient(ellipse at 50% 0%,#1a2c3f 0%,#050b14 58%,#02050a 100%)}
+button{font:inherit}
+.shell{max-width:1440px;margin:auto;border:1px solid #a27c37;box-shadow:0 0 0 3px #080e17,0 0 32px #000; background:#06101b}
+.topbar{min-height:82px;display:grid;grid-template-columns:minmax(220px,1fr) auto auto;align-items:center;gap:24px;padding:12px 22px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,#08121f,#101a27,#08121f)}
+.player{display:flex;align-items:center;gap:13px;min-width:0}
+.avatar{width:54px;height:54px;flex:0 0 54px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;background:radial-gradient(circle at 35% 25%,#6b7c87,#172333 60%,#070b12);font-size:25px;overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.player-name{font-size:16px;color:#fff0c8}
+.muted{font-size:12px;color:#b8b5ad;margin-top:4px}
+.xp{width:min(240px,35vw);height:7px;border:1px solid #7f6737;background:#07101a;margin-top:7px}
+.xp span{display:block;width:0%;height:100%;background:linear-gradient(90deg,#96712d,#f2d47d)}
+.stats{display:flex;align-items:center;gap:22px}
+.stat{display:flex;align-items:center;gap:10px;min-width:100px}
+.stat-icon{width:36px;height:36px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-size:19px}
+.stat strong{display:block;font-size:13px;font-weight:normal;color:#f6e7bf}
+.stat small{display:block;color:#d4b35c;font-size:13px;margin-top:4px}
+.main-grid{display:grid;grid-template-columns:minmax(0,1fr) 235px;gap:12px;padding:12px}
+.map-panel{min-width:0;border:1px solid #8e6b2d;position:relative;background:#06101b;overflow:hidden}
+.panel-heading{height:42px;display:flex;align-items:center;justify-content:center;gap:14px;text-transform:uppercase;letter-spacing:2px;font-size:16px;color:#f3d98e;background:linear-gradient(90deg,transparent,#0a1724 18%,#0a1724 82%,transparent)}
+.panel-heading:before,.panel-heading:after{content:"";height:1px;width:min(10%,80px);background:linear-gradient(90deg,transparent,var(--gold))}
+.panel-heading:after{transform:scaleX(-1)}
+.map-art{position:relative;line-height:0}
+.map-art>img{display:block;width:100%;height:auto}
+.region{position:absolute;display:flex;flex-direction:column;align-items:center;gap:5px;transform:translate(-50%,-50%);border:0;background:transparent;color:#fff0c9;cursor:pointer;line-height:1.2;text-shadow:0 2px 5px #000;min-width:130px;padding:4px}
+.region .seal{width:42px;height:42px;display:grid;place-items:center;border:2px solid var(--gold);border-radius:50%;background:rgba(3,10,18,.9);box-shadow:0 0 0 3px rgba(5,10,17,.65),0 0 15px #d7b35b35;font-size:21px}
+.region .label{background:rgba(3,9,17,.92);border:1px solid #9b7839;padding:7px 10px;font-size:clamp(10px,1.1vw,14px);white-space:nowrap}
+.region:hover .seal,.region:focus-visible .seal{box-shadow:0 0 0 3px #0a111c,0 0 24px #f3d98e;transform:scale(1.08)}
+.region:focus-visible{outline:2px solid #f4dfac;outline-offset:2px}
+#grecia{left:26%;top:32%}#reino{left:75%;top:32%}#cidade{left:27%;top:72%}#terras{left:75%;top:72%}
+.side{display:flex;flex-direction:column;gap:12px;min-width:0}
+.side-card{border:1px solid #8e6b2d;background:linear-gradient(145deg,rgba(11,22,35,.98),rgba(3,9,16,.98));padding:16px;box-shadow:inset 0 0 0 1px #d7b35b10}
+.side-card h2{font-size:16px;font-weight:normal;margin:0 0 12px;color:#f4d98f}
+.side-card p{font-size:13px;line-height:1.6;color:#d4d0c5;margin:0}
+.side-card em{display:block;margin-top:14px;font-size:12px;color:#d5b968}
+.progress-list{display:grid;gap:12px;margin-top:14px}
+.progress-row{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:#d6d0c1;border-bottom:1px solid #72582e;padding-bottom:8px}
+.progress-row span:last-child{color:#d8b65a}
+.bottom-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 12px 12px}
+.bottom-nav button{min-height:42px;color:#e9d39a;border:1px solid #8e6b2d;background:linear-gradient(100deg,#091421,#111d2b);cursor:pointer;font-size:12px;letter-spacing:.5px}
+.bottom-nav button:hover{background:#263348;border-color:#f1d58b}
+.notice{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:5;max-width:min(92vw,600px);padding:12px 18px;background:#07111df5;border:1px solid #c7a65a;color:#f4dfac;font:14px/1.4 Georgia,serif;text-align:center;box-shadow:0 8px 30px #0008;display:none}
+.notice.show{display:block}
+@media(max-width:850px){body{padding:5px}.topbar{grid-template-columns:1fr auto;gap:12px;padding:10px}.stats{gap:10px}.stat{min-width:auto}.stat-icon{width:30px;height:30px}.main-grid{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr}.side-card{padding:12px}.region{min-width:0}.region .seal{width:34px;height:34px;font-size:17px}.region .label{white-space:normal;text-align:center}}
+@media(max-width:520px){.topbar{grid-template-columns:1fr}.stats{justify-content:space-around}.player{justify-content:center}.xp{width:180px}.main-grid{padding:6px}.panel-heading{height:36px;font-size:13px}.region .seal{width:27px;height:27px;font-size:14px}.region .label{font-size:9px;padding:4px 5px}.side{grid-template-columns:1fr}.bottom-nav{grid-template-columns:repeat(2,1fr);padding:0 6px 6px}.stat strong{font-size:11px}.stat small{font-size:12px}}
+</style>
+</head>
+<body>
+<main class="shell" aria-label="Mapa de Crônicas da Filosofia">
+  <header class="topbar">
+    <div class="player">
+      <div class="avatar" id="avatar">🧭</div>
+      <div>
+        <div class="player-name" id="playerName">Viajante</div>
+        <div class="muted">Nível 1</div>
+        <div class="xp"><span></span></div>
+        <div class="muted" id="xpText">0 / 100 EXP</div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-icon">✺</div><div><strong>Conhecimento</strong><small id="points">0</small></div></div>
+      <div class="stat"><div class="stat-icon">◉</div><div><strong>Regiões concluídas</strong><small id="completed">0 / 4</small></div></div>
+    </div>
+  </header>
+  <div class="main-grid">
+    <section class="map-panel">
+      <div class="panel-heading">Mapa do Mundo</div>
+      <div class="map-art">
+        <img src="mapa-fantasia.png" alt="Mapa fantástico com Grécia Antiga, Reino do Conhecimento, Cidade das Ideias e Terras das Grandes Questões.">
+        <button class="region" id="grecia" aria-label="Explorar Grécia Antiga" title="Explorar Grécia Antiga"><span class="seal">♜</span><span class="label">Grécia Antiga</span></button>
+        <button class="region" id="reino" aria-label="Explorar Reino do Conhecimento" title="Explorar Reino do Conhecimento"><span class="seal">▤</span><span class="label">Reino do Conhecimento</span></button>
+        <button class="region" id="cidade" aria-label="Explorar Cidade das Ideias" title="Explorar Cidade das Ideias"><span class="seal">☏</span><span class="label">Cidade das Ideias</span></button>
+        <button class="region" id="terras" aria-label="Explorar Terras das Grandes Questões" title="Explorar Terras das Grandes Questões"><span class="seal">✺</span><span class="label">Terras das Grandes Questões</span></button>
+      </div>
+    </section>
+    <aside class="side">
+      <section class="side-card"><h2>Sua Jornada</h2><p>Quatro terras guardam perguntas antigas, ideias poderosas e mistérios ainda sem resposta.</p><em>Sua jornada começa aqui.</em></section>
+      <section class="side-card"><h2>Progresso</h2><p>Continue explorando para conquistar conhecimento e desbloquear novas regiões.</p><div class="progress-list">
+        <div class="progress-row"><span>Grécia Antiga</span><span id="pGrecia">Bloqueada</span></div>
+        <div class="progress-row"><span>Reino do Conhecimento</span><span id="pReino">Bloqueado</span></div>
+        <div class="progress-row"><span>Cidade das Ideias</span><span id="pCidade">Bloqueada</span></div>
+        <div class="progress-row"><span>Terras das Questões</span><span id="pTerras">Bloqueadas</span></div>
+      </div></section>
+    </aside>
+  </div>
+  <nav class="bottom-nav" aria-label="Menu do jogo">
+    <button id="diario">📖 Diário</button><button id="inventario">🎒 Inventário</button><button id="config">⚙ Configurações</button><button id="sair">↩ Tela inicial</button>
+  </nav>
+</main>
+<div class="notice" id="notice" role="status" aria-live="polite"></div>
+<script>
+const get = key => localStorage.getItem(key);
+const concluida = key => get(key) === 'sim' || get(key) === 'true' || get(key) === '1';
+const aviso = texto => {const n=document.getElementById('notice');n.textContent=texto;n.classList.add('show');clearTimeout(window.avisoTimer);window.avisoTimer=setTimeout(()=>n.classList.remove('show'),2800)};
+const nome = get('nomeJogador');
+const imagem = get('personagemEscolhido');
+if (nome) document.getElementById('playerName').textContent = nome;
+if (imagem && /\.(png|jpe?g|webp|gif)$/i.test(imagem)) {
+  const img=document.createElement('img'); img.src=imagem.includes('/')?imagem:'personagens/'+imagem; img.alt='Retrato do personagem'; document.getElementById('avatar').replaceChildren(img);
+}
+const pontos = Number(get('pontosFilosofia') || 0);
+document.getElementById('points').textContent = pontos;
+const chaves = ['regiaoGreciaConcluida','reinoConhecimentoConcluido','cidadeIdeiasConcluida','terrasGrandesQuestoesConcluida'];
+const total = chaves.filter(concluida).length;
+document.getElementById('completed').textContent = total + ' / 4';
+document.getElementById('pGrecia').textContent = concluida(chaves[0]) ? 'Concluída' : 'Disponível';
+document.getElementById('pReino').textContent = concluida(chaves[1]) ? 'Concluído' : (concluida(chaves[0]) ? 'Disponível' : 'Bloqueado');
+document.getElementById('pCidade').textContent = concluida(chaves[2]) ? 'Concluída' : (concluida(chaves[1]) ? 'Disponível' : 'Bloqueada');
+document.getElementById('pTerras').textContent = concluida(chaves[3]) ? 'Concluídas' : (concluida(chaves[2]) ? 'Disponível' : 'Bloqueadas');
+const abrirRegiao = (chaveAnterior, pagina, nomeRegiao) => {
+  if (!chaveAnterior || concluida(chaveAnterior)) window.location.href = pagina;
+  else aviso('🔒 Conclua a região anterior para desbloquear: ' + nomeRegiao + '.');
+};
+document.getElementById('grecia').addEventListener('click',()=>{if(get('confirmarAcoes')==='sim' && !confirm('Deseja entrar na Grécia Antiga?'))return;window.location.href='grecia.html';});
+document.getElementById('reino').addEventListener('click',()=>{if(get('confirmarAcoes')==='sim' && !confirm('Deseja explorar o Reino do Conhecimento?'))return;abrirRegiao('regiaoGreciaConcluida','reino.html','Reino do Conhecimento');});
+document.getElementById('cidade').addEventListener('click',()=>{if(get('confirmarAcoes')==='sim' && !confirm('Deseja explorar a Cidade das Ideias?'))return;abrirRegiao('reinoConhecimentoConcluido','cidade.html','Cidade das Ideias');});
+document.getElementById('terras').addEventListener('click',()=>{if(get('confirmarAcoes')==='sim' && !confirm('Deseja explorar as Terras das Grandes Questões?'))return;abrirRegiao('cidadeIdeiasConcluida','terras.html','Terras das Grandes Questões');});
+document.getElementById('diario').addEventListener('click',()=>{ window.location.href='diario.html'; });
+document.getElementById('inventario').addEventListener('click',()=>{ window.location.href='inventario.html'; });
+document.getElementById('config').addEventListener('click',()=>window.location.href='configuracoes.html');
+document.getElementById('sair').addEventListener('click',()=>{if(get('confirmarAcoes')==='sim' ? confirm('Deseja voltar à tela inicial?') : true) window.location.href='index.html';});
+</script>
+</body>
+</html>

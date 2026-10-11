@@ -1,0 +1,701 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cidade das Ideias | Crônicas da Filosofia</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  padding: 20px;
+  color: #f5e8c8;
+  font-family: Georgia, serif;
+  background: radial-gradient(ellipse at top, #343052, #171526 48%, #060711);
+}
+
+header {
+  text-align: center;
+  padding: 22px 10px 28px;
+}
+
+.eyebrow {
+  color: #e5c45c;
+  font-size: 11px;
+  letter-spacing: 4px;
+  margin-bottom: 12px;
+}
+
+h1 {
+  font-size: clamp(27px, 5vw, 43px);
+  letter-spacing: 2px;
+}
+
+header p {
+  max-width: 700px;
+  margin: 12px auto 0;
+  line-height: 1.7;
+  color: #c9c2d5;
+}
+
+.layout {
+  width: min(100%, 1050px);
+  margin: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(250px, .8fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.panel {
+  border: 1px solid #8d7cba;
+  border-radius: 12px;
+  background: #0b0d1bf2;
+  padding: 23px;
+  box-shadow: 0 0 25px #0005;
+}
+
+h2 {
+  color: #e5d28b;
+  font-size: 23px;
+  line-height: 1.4;
+  margin-bottom: 15px;
+}
+
+p {
+  line-height: 1.8;
+  margin-bottom: 13px;
+}
+
+.tag {
+  display: inline-block;
+  color: #f0d47b;
+  border: 1px solid #75669b;
+  border-radius: 30px;
+  padding: 6px 10px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+
+.dialogue {
+  padding: 15px;
+  margin: 19px 0;
+  border: 1px solid #75669b;
+  border-radius: 9px;
+  background: #17182c;
+  font-style: italic;
+  line-height: 1.7;
+}
+
+.dialogue strong {
+  display: block;
+  color: #f0d47b;
+  margin-bottom: 6px;
+  font-style: normal;
+}
+
+.question {
+  color: #f0d47b;
+  font-weight: bold;
+}
+
+.options {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.option {
+  display: flex;
+  gap: 11px;
+  padding: 13px;
+  border: 1px solid #55516c;
+  border-radius: 8px;
+  background: #111426;
+  cursor: pointer;
+  line-height: 1.6;
+}
+
+.option:hover {
+  border-color: #e5c45c;
+}
+
+.option input {
+  margin-top: 5px;
+  accent-color: #e5c45c;
+  flex-shrink: 0;
+}
+
+.btn {
+  width: 100%;
+  padding: 13px;
+  margin-top: 10px;
+  border: 1px solid #e5c45c;
+  border-radius: 7px;
+  background: #d8b35c;
+  color: #11101b;
+  font: bold 13px Georgia, serif;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #f4d98a;
+}
+
+.btn.secondary {
+  background: transparent;
+  color: #f0d47b;
+}
+
+.hint-box {
+  margin: 15px 0;
+  padding: 13px;
+  border: 1px solid #75669b;
+  border-radius: 8px;
+  background: #17182c;
+  line-height: 1.7;
+}
+
+.hint-box p {
+  margin: 8px 0 0;
+  color: #e8dfc6;
+}
+
+.hint-box .btn {
+  margin-top: 8px;
+}
+
+.feedback {
+  display: none;
+  padding: 14px;
+  margin: 15px 0;
+  border: 1px solid #8d7cba;
+  border-radius: 8px;
+  background: #17182c;
+  line-height: 1.7;
+}
+
+.small {
+  color: #c9c2d5;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.progress {
+  height: 8px;
+  margin: 12px 0 20px;
+  border-radius: 20px;
+  background: #29273b;
+  overflow: hidden;
+}
+
+#bar {
+  height: 100%;
+  width: 0;
+  background: #e5c45c;
+  transition: width .3s;
+}
+
+.philosopher {
+  padding: 13px 0;
+  border-bottom: 1px solid #39344e;
+  line-height: 1.6;
+}
+
+.philosopher strong {
+  color: #f0d47b;
+}
+
+.note {
+  margin-top: 20px;
+  padding: 12px;
+  border-left: 3px solid #75669b;
+  background: #121326;
+  color: #c9c2d5;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.quote {
+  margin-top: 20px;
+  padding-top: 17px;
+  border-top: 1px solid #75669b;
+  color: #e5d28b;
+  font-style: italic;
+  line-height: 1.7;
+}
+
+@media (max-width: 720px) {
+  body { padding: 12px; }
+  .layout { grid-template-columns: 1fr; }
+  .panel { padding: 17px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <p class="eyebrow">CRÔNICAS DA FILOSOFIA</p>
+  <h1>💭 CIDADE DAS IDEIAS</h1>
+  <p>
+    Conheça as vidas, os conflitos e as ideias de três pensadores
+    que marcaram a história da Filosofia.
+  </p>
+</header>
+
+<main class="layout">
+
+  <section class="panel">
+    <span class="tag" id="tag">PRÓLOGO</span>
+
+    <h2 id="title">Os portões da sabedoria</h2>
+
+    <p id="story">
+      Depois de atravessar os caminhos do Reino do Conhecimento,
+      você chega a uma cidade de templos, praças e colunas de mármore.
+      No centro existem três caminhos, cada um levando a um grande pensador.
+    </p>
+
+    <p id="story2">
+      Sofia explica que compreender a Filosofia também significa
+      conhecer as pessoas, as sociedades e os acontecimentos que
+      ajudaram a formar suas ideias.
+    </p>
+
+    <div class="dialogue" id="dialogue">
+      <strong>Sofia, guardiã do conhecimento</strong>
+      "Cada filósofo viveu em um tempo específico. Para compreender
+      suas ideias, precisamos conhecer também o mundo em que viveu."
+    </div>
+
+    <p class="question" id="question">
+      Sua jornada começa em Atenas, onde um homem transformou
+      conversas e perguntas em uma maneira de investigar a vida.
+    </p>
+
+    <div class="options" id="options" style="display:none"></div>
+
+    <div class="hint-box" id="hintBox" style="display:none">
+      <strong>💡 Precisa de uma pista?</strong>
+      <p id="hintText" style="display:none"></p>
+      <button class="btn secondary" id="hintButton" type="button" onclick="revealHint()">REVELAR DICA</button>
+    </div>
+
+    <div class="feedback" id="feedback" aria-live="polite"></div>
+
+    <button class="btn" id="action" onclick="startAdventure()">
+      COMEÇAR A JORNADA →
+    </button>
+
+    <button class="btn secondary" onclick="backToMap()">
+      ← VOLTAR AO MAPA
+    </button>
+
+    <div class="note">
+      <strong>Nota histórica:</strong> os diálogos desta aventura são
+      dramatizações educativas. Não são transcrições literais de conversas
+      históricas. As ideias e os acontecimentos apresentados se baseiam
+      na tradição filosófica e histórica.
+    </div>
+  </section>
+
+  <aside class="panel">
+    <h2>✦ Seu progresso</h2>
+
+    <p id="player">Viajante: Viajante</p>
+    <p>Conhecimento nesta aventura: <strong id="score">0</strong> pontos</p>
+    <p>Desafios: <strong id="counter">0/6</strong></p>
+
+    <div class="progress">
+      <div id="bar"></div>
+    </div>
+
+    <div class="philosopher">
+      <strong>🏺 Sócrates</strong>
+      <p class="small">
+        Atenas, século V a.C.<br>
+        Diálogo, questionamento e exame das próprias crenças.
+      </p>
+    </div>
+
+    <div class="philosopher">
+      <strong>🌟 Platão</strong>
+      <p class="small">
+        Atenas, aproximadamente 427–347 a.C.<br>
+        Teoria das Ideias, conhecimento e Alegoria da Caverna.
+      </p>
+    </div>
+
+    <div class="philosopher">
+      <strong>📜 Aristóteles</strong>
+      <p class="small">
+        Estagira, 384–322 a.C.<br>
+        Lógica, natureza, ética e vida boa.
+      </p>
+    </div>
+
+    <div class="quote">
+      Conhecer uma ideia é importante. Compreender como ela surgiu
+      e por que foi defendida é dar um passo além.
+    </div>
+  </aside>
+
+</main>
+
+<script>
+const playerName = localStorage.getItem("nomeJogador") || "Viajante";
+
+document.getElementById("player").textContent =
+  "Viajante: " + playerName;
+
+const challenges = [
+
+  {
+    tag: "CAPÍTULO I — SÓCRATES",
+    title: "1. Atenas e o nascimento de uma pergunta",
+    story:
+      "Estamos em Atenas, no século V a.C. A cidade é um importante centro político e cultural do mundo grego. Nas praças, cidadãos conversam sobre justiça, virtude, política e a melhor maneira de viver. Entre eles está Sócrates, nascido por volta de 470/469 a.C.",
+    story2:
+      "Sócrates não deixou obras escritas conhecidas. Grande parte do que sabemos sobre ele vem de autores como Platão e Xenofonte, além da representação satírica feita por Aristófanes. Por isso, conhecer seu pensamento exige cuidado com as fontes.",
+    dialogue:
+      "Sofia: Sócrates ficou conhecido por conversar com as pessoas e examinar suas afirmações. Em vez de simplesmente entregar respostas prontas, ele fazia perguntas que levavam seus interlocutores a pensar.",
+    question:
+      "Qual atitude está mais associada à maneira socrática de investigar uma ideia?",
+    options: [
+      "Aceitar as opiniões tradicionais sem examiná-las.",
+      "Fazer perguntas, dialogar e investigar possíveis contradições.",
+      "Acreditar que uma pessoa nunca pode se enganar.",
+      "Evitar conversas sobre justiça e conhecimento."
+    ],
+    correct: 1,
+    explanation:
+      "Correto! O questionamento e o diálogo são centrais na tradição socrática. Ao examinar definições e crenças, Sócrates levava as pessoas a perceber dificuldades e a reconhecer aquilo que ainda precisavam investigar."
+  },
+
+  {
+    tag: "CAPÍTULO I — SÓCRATES",
+    title: "2. O julgamento de Sócrates",
+    story:
+      "Anos depois, Atenas enfrenta tensões políticas e sociais. Em 399 a.C., Sócrates é levado a julgamento. As acusações registradas na tradição incluem não reconhecer os deuses reconhecidos pela cidade, introduzir novas entidades divinas e corromper os jovens.",
+    story2:
+      "Sócrates é considerado culpado e condenado à morte. Os diálogos de Platão, especialmente a Apologia de Sócrates e o Críton, apresentam reflexões sobre sua defesa, a justiça e sua relação com as leis. Esses textos são fontes filosóficas, não registros neutros de cada palavra pronunciada.",
+    dialogue:
+      "Sofia: A história de Sócrates nos coloca diante de perguntas difíceis. Uma sociedade pode punir alguém por suas ideias? Como devemos avaliar uma decisão legal? Justiça e legalidade são sempre a mesma coisa?",
+    question:
+      "Qual problema filosófico podemos investigar a partir do julgamento de Sócrates?",
+    options: [
+      "Se toda decisão de um tribunal é necessariamente justa.",
+      "Se a filosofia deve abandonar todas as questões políticas.",
+      "Como pensar a relação entre justiça, leis e liberdade de pensamento.",
+      "Se o passado não tem nenhuma relação com questões atuais."
+    ],
+    correct: 2,
+    explanation:
+      "Muito bem! O julgamento de Sócrates permite discutir a relação entre leis, justiça, consciência e liberdade de pensamento. Não existe uma única resposta simples para todos esses problemas: eles exigem argumentação e análise."
+  },
+
+  {
+    tag: "CAPÍTULO II — PLATÃO",
+    title: "3. O discípulo e a Academia",
+    story:
+      "Agora seguimos para a vida de Platão, nascido em Atenas por volta de 427 a.C. Ele viveu em um período de conflitos políticos, incluindo a Guerra do Peloponeso, que envolveu Atenas e Esparta. A condenação de Sócrates tornou-se um acontecimento importante na tradição associada à sua filosofia.",
+    story2:
+      "Platão escreveu diálogos filosóficos nos quais Sócrates aparece frequentemente como interlocutor. Por volta de 387 a.C., segundo a cronologia tradicional, Platão fundou em Atenas uma escola conhecida como Academia. Ali, a investigação filosófica tornou-se parte de uma atividade de estudo e discussão.",
+    dialogue:
+      "Sofia: Platão não se limitou a repetir o mestre. Desenvolveu suas próprias reflexões sobre conhecimento, justiça, política e realidade. Para compreender suas ideias, precisamos examinar os argumentos apresentados em seus diálogos.",
+    question:
+      "Qual afirmação descreve melhor a relação de Platão com Sócrates?",
+    options: [
+      "Platão registrou e desenvolveu questões filosóficas associadas a Sócrates, construindo também seu próprio pensamento.",
+      "Platão nunca viveu em Atenas.",
+      "Platão deixou apenas experimentos científicos, sem textos filosóficos.",
+      "Platão rejeitou qualquer discussão sobre conhecimento e justiça."
+    ],
+    correct: 0,
+    explanation:
+      "Isso mesmo! Platão é uma fonte fundamental para conhecermos a figura de Sócrates, mas seus diálogos também apresentam investigações filosóficas próprias, como a Teoria das Ideias e suas reflexões sobre a justiça."
+  },
+
+  {
+    tag: "CAPÍTULO II — PLATÃO",
+    title: "4. A Alegoria da Caverna",
+    story:
+      "Você entra em uma caverna imaginada por Platão na República. Pessoas que passaram a vida observando sombras projetadas em uma parede acreditam que aquelas imagens representam toda a realidade. Uma delas é libertada e começa a descobrir um mundo que desconhecia.",
+    story2:
+      "Ao sair da caverna, a pessoa precisa se acostumar à luz. A descoberta não é instantânea nem fácil. A alegoria pode ser interpretada como uma reflexão sobre educação, ignorância, conhecimento e a dificuldade de rever aquilo que sempre acreditamos.",
+    dialogue:
+      "Platão: Na alegoria, sair da caverna representa um percurso de transformação do entendimento. Aprender não é simplesmente trocar uma resposta por outra; é investigar por que consideramos algo verdadeiro.",
+    question:
+      "Na Alegoria da Caverna, o que as sombras representam principalmente?",
+    options: [
+      "A totalidade do conhecimento científico.",
+      "As aparências tomadas como se fossem toda a realidade.",
+      "A impossibilidade de aprender.",
+      "A certeza de que todas as opiniões são verdadeiras."
+    ],
+    correct: 1,
+    explanation:
+      "Correto! As sombras representam uma visão limitada da realidade, tomada como se fosse completa. A saída da caverna simboliza um processo de educação e investigação. A alegoria não é apenas uma história sobre luz e escuridão: ela convida a pensar sobre como conhecemos."
+  },
+
+  {
+    tag: "CAPÍTULO III — ARISTÓTELES",
+    title: "5. O aluno que investigava a natureza",
+    story:
+      "O último caminho leva a Aristóteles, nascido em Estagira em 384 a.C. Ainda jovem, ele foi para Atenas e estudou na Academia de Platão. Permaneceu ligado a esse ambiente de estudo por muitos anos, mas desenvolveu abordagens próprias para investigar a realidade.",
+    story2:
+      "Aristóteles estudou temas muito variados: lógica, animais, movimento, política, poesia, ética e formas de argumentação. Mais tarde, esteve ligado à educação de Alexandre da Macedônia e fundou sua própria escola em Atenas, conhecida como Liceu.",
+    dialogue:
+      "Sofia: Aristóteles valorizava a observação, a organização dos argumentos e a investigação sistemática. Sua filosofia mostra que podemos estudar a natureza, o raciocínio e as ações humanas por diferentes caminhos.",
+    question:
+      "Qual alternativa representa melhor a amplitude do trabalho de Aristóteles?",
+    options: [
+      "Ele estudou exclusivamente a mitologia e rejeitou qualquer investigação da natureza.",
+      "Ele acreditava que argumentos nunca precisam de estrutura.",
+      "Ele investigou áreas variadas, incluindo lógica, natureza, ética e política.",
+      "Ele nunca estudou com outros pensadores."
+    ],
+    correct: 2,
+    explanation:
+      "Excelente! Aristóteles produziu reflexões em muitas áreas do conhecimento. Seu trabalho contribuiu para a lógica, a biologia, a metafísica, a ética, a política e o estudo da literatura, entre outras disciplinas."
+  },
+
+  {
+    tag: "CAPÍTULO III — ARISTÓTELES",
+    title: "6. A virtude e a vida boa",
+    story:
+      "No Liceu, você encontra uma discussão sobre como devemos viver. Uma pessoa acredita que a felicidade depende apenas de possuir riquezas; outra pensa que uma boa vida exige escolhas refletidas, relações humanas e o desenvolvimento do caráter.",
+    story2:
+      "Na Ética a Nicômaco, Aristóteles investiga a eudaimonia, palavra geralmente traduzida como felicidade, florescimento ou realização humana. Para ele, viver bem envolve atividade racional e o exercício das virtudes ao longo da vida. A virtude moral se relaciona com hábitos e escolhas, não apenas com conhecer uma regra.",
+    dialogue:
+      "Sofia: Para Aristóteles, não basta perguntar o que é uma boa ação em teoria. Também precisamos considerar como nossas escolhas habituais formam nosso caráter e contribuem para uma vida humana realizada.",
+    question:
+      "Qual alternativa combina melhor com a ética aristotélica?",
+    options: [
+      "A vida boa consiste somente em acumular riquezas.",
+      "As escolhas e os hábitos não têm influência no caráter.",
+      "A virtude exige evitar toda reflexão sobre nossas ações.",
+      "A vida boa envolve razão, virtudes e a formação de bons hábitos."
+    ],
+    correct: 3,
+    explanation:
+      "Muito bem! A ética de Aristóteles relaciona a eudaimonia à atividade racional conforme a virtude. A prática e os hábitos têm papel importante no desenvolvimento do caráter. Isso não significa que a vida boa seja igual para todas as pessoas em todos os detalhes, mas que exige reflexão sobre como viver e agir."
+  }
+];
+
+let stage = -1;
+let correctAnswers = 0;
+let adventurePoints = 0;
+let waitingForNext = false;
+let hintRevealed = false;
+
+const challengeHints = [
+  "Sócrates não costumava oferecer respostas prontas: ele fazia perguntas para testar ideias e revelar contradições.",
+  "Pense na diferença entre uma decisão ser permitida pelas leis e ela ser necessariamente justa. São sempre a mesma coisa?",
+  "Platão aprendeu muito com Sócrates, mas também desenvolveu investigações filosóficas próprias.",
+  "Na caverna, as pessoas confundem imagens limitadas com a realidade inteira. O que isso pode simbolizar sobre o conhecimento?",
+  "Aristóteles estudou muitos campos diferentes. Procure a alternativa que menciona várias áreas, não apenas uma.",
+  "Para Aristóteles, viver bem envolve desenvolver o caráter por meio de escolhas e hábitos refletidos, e não apenas possuir riqueza."
+];
+
+function revealHint() {
+  if (stage < 0 || stage >= challenges.length || waitingForNext) return;
+  hintRevealed = true;
+  document.getElementById("hintText").textContent = challengeHints[stage];
+  document.getElementById("hintText").style.display = "block";
+  document.getElementById("hintButton").textContent = "DICA REVELADA";
+  document.getElementById("hintButton").disabled = true;
+}
+
+function startAdventure() {
+  stage = 0;
+  showChallenge();
+}
+
+function showChallenge() {
+  waitingForNext = false;
+  hintRevealed = false;
+
+  const hintBox = document.getElementById("hintBox");
+  const hintEnabled = localStorage.getItem("dicasAtivas") !== "nao";
+  hintBox.style.display = hintEnabled ? "block" : "none";
+  document.getElementById("hintText").textContent = "";
+  document.getElementById("hintText").style.display = "none";
+  document.getElementById("hintButton").textContent = "REVELAR DICA";
+  document.getElementById("hintButton").disabled = false;
+
+  const c = challenges[stage];
+
+  document.getElementById("tag").textContent = c.tag;
+  document.getElementById("title").textContent = c.title;
+  document.getElementById("story").textContent = c.story;
+  document.getElementById("story2").textContent = c.story2;
+
+  document.getElementById("dialogue").textContent = c.dialogue;
+
+  document.getElementById("question").textContent = c.question;
+
+  const options = document.getElementById("options");
+  options.innerHTML = "";
+  options.style.display = "grid";
+
+  c.options.forEach((text, index) => {
+    const label = document.createElement("label");
+    label.className = "option";
+
+    const input = document.createElement("input");
+    input.type = "radio";
+    input.name = "answer";
+    input.value = index;
+
+    const span = document.createElement("span");
+    span.textContent = text;
+
+    label.appendChild(input);
+    label.appendChild(span);
+    options.appendChild(label);
+  });
+
+  document.getElementById("feedback").style.display = "none";
+
+  const action = document.getElementById("action");
+  action.textContent = "CONFIRMAR RESPOSTA";
+  action.onclick = checkAnswer;
+
+  document.getElementById("counter").textContent =
+    stage + "/" + challenges.length;
+
+  document.getElementById("bar").style.width =
+    (stage / challenges.length * 100) + "%";
+}
+
+function checkAnswer() {
+  if (waitingForNext) {
+    nextChallenge();
+    return;
+  }
+
+  const selected = document.querySelector(
+    'input[name="answer"]:checked'
+  );
+
+  if (!selected) {
+    alert("Escolha uma resposta antes de continuar!");
+    return;
+  }
+
+  waitingForNext = true;
+
+  const c = challenges[stage];
+  const isCorrect = Number(selected.value) === c.correct;
+  const feedback = document.getElementById("feedback");
+
+  feedback.style.display = "block";
+
+  if (isCorrect) {
+    correctAnswers++;
+    adventurePoints += 10;
+
+    feedback.innerHTML =
+      "<strong>✓ Resposta correta! +10 pontos</strong><br>" +
+      c.explanation;
+  } else {
+    feedback.innerHTML =
+      "<strong>Vamos refletir!</strong><br>" + c.explanation;
+  }
+
+  document.querySelectorAll('input[name="answer"]').forEach(input => {
+    input.disabled = true;
+  });
+
+  document.getElementById("score").textContent = adventurePoints;
+
+  document.getElementById("counter").textContent =
+    (stage + 1) + "/" + challenges.length;
+
+  document.getElementById("bar").style.width =
+    ((stage + 1) / challenges.length * 100) + "%";
+
+  document.getElementById("action").textContent =
+    stage === challenges.length - 1
+      ? "CONCLUIR A AVENTURA →"
+      : "PRÓXIMO CAPÍTULO →";
+}
+
+function nextChallenge() {
+  if (stage < challenges.length - 1) {
+    stage++;
+    showChallenge();
+  } else {
+    finishAdventure();
+  }
+}
+
+function finishAdventure() {
+  document.getElementById("tag").textContent = "JORNADA CONCLUÍDA";
+
+  document.getElementById("title").textContent =
+    "A Cidade das Ideias reconhece sua jornada!";
+
+  document.getElementById("story").textContent =
+    "Você conheceu o questionamento de Sócrates, a investigação de Platão sobre o conhecimento e a realidade e as reflexões de Aristóteles sobre a natureza, a lógica e a vida boa.";
+
+  document.getElementById("story2").textContent =
+    "Os três caminhos agora se encontram na praça. Você percebe que a Filosofia não é apenas uma coleção de nomes e teorias: é uma investigação contínua sobre como pensamos, conhecemos e vivemos.";
+
+  document.getElementById("dialogue").innerHTML =
+    "<strong>Sofia, guardiã do conhecimento</strong>" +
+    "Você aprendeu que cada pensador enfrentou perguntas de seu tempo. " +
+    "Agora, use o que descobriu para formular suas próprias perguntas, " +
+    "examinar argumentos e buscar boas razões.";
+
+  document.getElementById("question").textContent =
+    "Respostas corretas: " + correctAnswers + " de " +
+    challenges.length + ". Pontos conquistados nesta aventura: " +
+    adventurePoints + ".";
+
+  document.getElementById("options").style.display = "none";
+  document.getElementById("feedback").style.display = "none";
+  document.getElementById("hintBox").style.display = "none";
+
+  document.getElementById("action").textContent = "VOLTAR AO MAPA";
+  document.getElementById("action").onclick = backToMap;
+
+  document.getElementById("bar").style.width = "100%";
+
+  localStorage.setItem("cidadeIdeiasConcluida", "sim");
+
+  // Evita adicionar novamente os pontos se a aventura for repetida.
+  if (localStorage.getItem("cidadePontosAdicionados") !== "sim") {
+    const previousPoints = Number(
+      localStorage.getItem("pontosFilosofia") || 0
+    );
+
+    localStorage.setItem(
+      "pontosFilosofia",
+      previousPoints + adventurePoints
+    );
+
+    localStorage.setItem("cidadePontosAdicionados", "sim");
+  }
+
+  document.getElementById("score").textContent = adventurePoints;
+}
+
+function backToMap() {
+  window.location.href = "mapa.html";
+}
+</script>
+
+</body>
+</html>

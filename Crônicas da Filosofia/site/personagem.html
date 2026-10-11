@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criação do Protagonista</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="tela-personagem">
+        <section class="criacao">
+
+            <p class="subtitulo">SUA JORNADA COMEÇA AQUI</p>
+            <h1>CRIE SEU PROTAGONISTA</h1>
+
+            <p class="descricao">
+                Escolha quem viverá esta jornada pelo mundo das ideias.
+            </p>
+
+            <div class="selecao-personagens">
+                <h2>ESCOLHA SEU PROTAGONISTA</h2>
+
+                <div class="lista-personagens">
+
+                    <button type="button" class="personagem-opcao" data-personagem="personagem1.jpeg">
+                        <img src="personagens/personagem1.jpeg" alt="Personagem 1">
+                        <span>Personagem 1</span>
+                    </button>
+
+                    <button type="button" class="personagem-opcao" data-personagem="personagem2.jpeg">
+                        <img src="personagens/personagem2.jpeg" alt="Personagem 2">
+                        <span>Personagem 2</span>
+                    </button>
+
+                    <button type="button" class="personagem-opcao" data-personagem="personagem3.jpeg">
+                        <img src="personagens/personagem3.jpeg" alt="Personagem 3">
+                        <span>Personagem 3</span>
+                    </button>
+
+                    <button type="button" class="personagem-opcao" data-personagem="personagem4.jpeg">
+                        <img src="personagens/personagem4.jpeg" alt="Personagem 4">
+                        <span>Personagem 4</span>
+                    </button>
+
+                    <button type="button" class="personagem-opcao" data-personagem="personagem5.jpeg">
+                        <img src="personagens/personagem5.jpeg" alt="Personagem 5">
+                        <span>Personagem 5</span>
+                    </button>
+
+                </div>
+            </div>
+
+            <div class="opcoes">
+                <label for="nome">Nome do personagem</label>
+                <input type="text" id="nome" placeholder="Digite o nome...">
+
+                <button type="button" id="continuar-personagem">
+                    CONTINUAR
+                </button>
+            </div>
+
+        </section>
+    </main>
+
+    <script>
+        const nome = document.getElementById("nome");
+        const continuar = document.getElementById("continuar-personagem");
+        const personagens = document.querySelectorAll(".personagem-opcao");
+
+        let personagemEscolhido = localStorage.getItem("personagemEscolhido") || "";
+
+        nome.value = localStorage.getItem("nomeJogador") || "";
+
+        personagens.forEach(function(botao) {
+            if (botao.dataset.personagem === personagemEscolhido) {
+                botao.classList.add("selecionado");
+            }
+
+            botao.addEventListener("click", function() {
+                personagens.forEach(function(item) {
+                    item.classList.remove("selecionado");
+                });
+
+                botao.classList.add("selecionado");
+                personagemEscolhido = botao.dataset.personagem;
+
+                localStorage.setItem("personagemEscolhido", personagemEscolhido);
+            });
+        });
+
+        continuar.addEventListener("click", function() {
+            if (personagemEscolhido === "") {
+                alert("Escolha um dos cinco personagens primeiro!");
+                return;
+            }
+
+            if (nome.value.trim() === "") {
+                alert("Digite um nome para seu personagem!");
+                nome.focus();
+                return;
+            }
+
+          localStorage.setItem("nomeJogador", nome.value.trim());
+
+window.location.href = "entrada.html";
+        });
+    </script>
+</body>
+</html>

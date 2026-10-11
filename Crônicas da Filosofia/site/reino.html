@@ -1,0 +1,521 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reino do Conhecimento | Crônicas da Filosofia</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: radial-gradient(ellipse at top, #1b3550, #080e1a 65%, #03060c);
+  color: #f5e8c8;
+  font-family: Georgia, serif;
+  padding: 22px;
+}
+
+header {
+  text-align: center;
+  padding: 20px 0 28px;
+}
+
+.eyebrow {
+  color: #e5c45c;
+  letter-spacing: 4px;
+  font-size: 11px;
+  margin-bottom: 12px;
+}
+
+h1 {
+  font-size: clamp(28px, 5vw, 44px);
+  letter-spacing: 2px;
+}
+
+.subtitulo {
+  color: #c9c2b5;
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+.painel {
+  width: min(100%, 1000px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(260px, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.caixa {
+  background: #071323ed;
+  border: 1px solid #a98a3e;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 0 25px #0005;
+}
+
+h2 {
+  color: #f2d17a;
+  font-size: 23px;
+  margin-bottom: 16px;
+}
+
+p {
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+
+.dialogo {
+  border: 1px solid #8f752f;
+  border-radius: 9px;
+  padding: 16px;
+  margin: 20px 0;
+  background: #10223a;
+  font-style: italic;
+}
+
+.dialogo strong {
+  display: block;
+  color: #f2d17a;
+  margin-bottom: 7px;
+  font-style: normal;
+}
+
+.pergunta {
+  color: #f2d17a;
+  font-weight: bold;
+}
+
+.opcoes {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.opcao {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid #5d6471;
+  border-radius: 8px;
+  cursor: pointer;
+  line-height: 1.6;
+  background: #0b1b2e;
+}
+
+.opcao:hover {
+  border-color: #e5c45c;
+}
+
+.opcao input {
+  margin-top: 5px;
+  accent-color: #e5c45c;
+}
+
+.botao {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1px solid #e5c45c;
+  border-radius: 7px;
+  background: #d9ad4d;
+  color: #10101a;
+  font: bold 13px Georgia, serif;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.botao:hover {
+  background: #f2d17a;
+}
+
+.botao.secundario {
+  margin-top: 12px;
+  background: transparent;
+  color: #f2d17a;
+}
+
+.feedback {
+  display: none;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+  line-height: 1.7;
+  background: #13283a;
+  border: 1px solid #8f752f;
+}
+
+.progresso {
+  height: 8px;
+  background: #283243;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 12px 0 20px;
+}
+
+#barra {
+  width: 0%;
+  height: 100%;
+  background: #e5c45c;
+  transition: width .3s;
+}
+
+.pequeno {
+  color: #c9c2b5;
+  font-size: 13px;
+}
+
+.citacao {
+  border-top: 1px solid #65552f;
+  padding-top: 18px;
+  margin-top: 22px;
+  color: #f2d17a;
+  font-style: italic;
+}
+
+#aventura {
+  min-height: 250px;
+}
+
+@media (max-width: 700px) {
+  body { padding: 12px; }
+  .painel { grid-template-columns: 1fr; }
+  .caixa { padding: 18px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <p class="eyebrow">CRÔNICAS DA FILOSOFIA</p>
+  <h1>📚 REINO DO CONHECIMENTO</h1>
+  <p class="subtitulo">
+    A verdade não é tão simples quanto parece.
+  </p>
+</header>
+
+<main class="painel">
+
+  <section class="caixa" id="aventura">
+    <h2 id="titulo">A biblioteca das mil vozes</h2>
+
+    <p id="historia">
+      Depois de atravessar os portões da Grécia Antiga, você encontra
+      uma estrada iluminada por símbolos dourados. No fim dela surge
+      um reino extraordinário: torres suspensas, livros flutuantes e
+      uma biblioteca que parece não ter fim.
+    </p>
+
+    <p id="historia2">
+      Dentro da biblioteca, grupos discutem sem parar. Todos afirmam
+      estar certos, mas ninguém parece disposto a examinar suas próprias
+      ideias.
+    </p>
+
+    <div class="dialogo" id="fala">
+      <strong>Sofia, guardiã do conhecimento</strong>
+      "Viajar não significa apenas conhecer novos lugares.
+      Também precisamos aprender a examinar aquilo em que acreditamos."
+    </div>
+
+    <p id="pergunta" class="pergunta">
+      Sua missão é descobrir o que diferencia uma opinião de um
+      conhecimento bem fundamentado.
+    </p>
+
+    <div id="area-opcoes" class="opcoes" style="display:none"></div>
+
+    <div id="area-dica" style="display:none;margin:14px 0">
+      <button type="button" class="botao secundario" id="botaoDica" style="margin-top:0">💡 REVELAR DICA</button>
+      <div id="textoDica" class="feedback" aria-live="polite"></div>
+    </div>
+
+    <div id="feedback" class="feedback" aria-live="polite"></div>
+
+    <button class="botao" id="acao" onclick="iniciar()">
+      ENTRAR NA BIBLIOTECA →
+    </button>
+
+    <button class="botao secundario" onclick="voltarMapa()">
+      ← VOLTAR AO MAPA
+    </button>
+  </section>
+
+  <aside class="caixa">
+    <h2>✦ Seu progresso</h2>
+    <p id="nomeJogador">Viajante: Viajante</p>
+    <p>Conhecimento: <strong id="pontos">0</strong> pontos</p>
+    <p>Desafios: <strong id="contador">0/4</strong></p>
+
+    <div class="progresso">
+      <div id="barra"></div>
+    </div>
+
+    <p class="pequeno">
+      Cada resposta correta vale 10 pontos.
+      Leia as explicações para compreender os conceitos.
+    </p>
+
+    <div class="citacao">
+      "Uma vida sem questionamento não merece ser vivida."
+      <br><br>
+      <span class="pequeno">— Ideia associada a Sócrates</span>
+    </div>
+  </aside>
+
+</main>
+
+<script>
+const nome = localStorage.getItem("nomeJogador") || "Viajante";
+
+document.getElementById("nomeJogador").textContent =
+  "Viajante: " + nome;
+
+const desafios = [
+  {
+    titulo: "Desafio 1 — O que é conhecer?",
+    historia: "Um grupo afirma que uma ideia é verdadeira apenas porque muitas pessoas acreditam nela. Outro grupo pede razões e evidências antes de aceitar a afirmação.",
+    fala: "Sofia: 'Popularidade e certeza pessoal não são a mesma coisa que conhecimento. Precisamos examinar as razões que sustentam uma afirmação.'",
+    pergunta: "Qual atitude é mais adequada para investigar se uma afirmação tem fundamento?",
+    opcoes: [
+      "Aceitar a afirmação porque a maioria acredita nela.",
+      "Acreditar em quem fala com mais confiança.",
+      "Examinar as razões, as evidências e possíveis objeções.",
+      "Rejeitar tudo sem analisar nenhuma informação."
+    ],
+    correta: 2,
+    explicacao: "Isso mesmo! O pensamento crítico examina razões e evidências. Uma afirmação não se torna verdadeira só porque muita gente acredita nela.",
+    dica: "Pense na diferença entre algo ser popular e algo ter boas justificativas. O que ajudaria a verificar a afirmação?"
+  },
+  {
+    titulo: "Desafio 2 — Opinião e conhecimento",
+    historia: "Dois viajantes discutem sobre uma planta misteriosa. Um diz que ela cura qualquer doença porque ouviu isso de alguém. O outro procura estudos e informações confiáveis.",
+    fala: "Sofia: 'Ter uma opinião é normal. O importante é reconhecer que nossas crenças podem estar erradas e precisam ser examinadas.'",
+    pergunta: "Qual alternativa diferencia melhor uma opinião de um conhecimento fundamentado?",
+    opcoes: [
+      "Toda opinião é falsa e todo conhecimento é infalível.",
+      "Uma opinião é uma crença; um conhecimento fundamentado exige boas razões e evidências.",
+      "Uma ideia vira conhecimento quando é repetida muitas vezes.",
+      "A opinião de uma pessoa importante nunca precisa ser questionada."
+    ],
+    correta: 1,
+    explicacao: "Correto! Opiniões são crenças ou avaliações que podemos ter. Para sustentar uma afirmação como conhecimento, precisamos examinar as justificativas disponíveis. Mesmo assim, devemos estar abertos a novas evidências.",
+    dica: "Uma pessoa ouviu uma afirmação de alguém; a outra procurou informações confiáveis. Qual delas buscou justificativas?"
+  },
+  {
+    titulo: "Desafio 3 — O senso comum",
+    historia: "Na praça, um morador afirma que um acontecimento sempre traz azar porque isso é dito há gerações. Você decide investigar em vez de aceitar a ideia automaticamente.",
+    fala: "Sofia: 'O senso comum reúne ideias e costumes compartilhados no cotidiano. Ele pode ajudar em algumas situações, mas também pode conter erros e preconceitos.'",
+    pergunta: "O que significa pensar criticamente diante de uma crença do senso comum?",
+    opcoes: [
+      "Aceitar a crença porque é antiga.",
+      "Ridicularizar quem acredita nela.",
+      "Investigar suas razões, seu contexto e as evidências disponíveis.",
+      "Trocar a crença por outra sem fazer perguntas."
+    ],
+    correta: 2,
+    explicacao: "Muito bem! Pensar criticamente é examinar uma ideia com cuidado, sem aceitá-la nem rejeitá-la automaticamente por ser tradicional ou popular.",
+    dica: "Você não precisa ridicularizar nem aceitar a crença só por ser antiga. O caminho filosófico é investigar."
+  },
+  {
+    titulo: "Desafio 4 — A coragem de questionar",
+    historia: "Na última sala, você encontra uma porta selada. A inscrição diz: 'Só entra quem sabe por que acredita no que acredita'.",
+    fala: "Sofia: 'Filosofar não é duvidar de tudo para sempre. É perguntar, buscar razões, avaliar respostas e reconhecer os limites do que sabemos.'",
+    pergunta: "Qual atitude combina melhor com a investigação filosófica?",
+    opcoes: [
+      "Nunca mudar de opinião, mesmo diante de boas evidências.",
+      "Fazer perguntas, analisar argumentos e rever ideias quando necessário.",
+      "Considerar que todas as respostas são igualmente justificadas.",
+      "Aceitar a primeira explicação que parecer convincente."
+    ],
+    correta: 1,
+    explicacao: "Exatamente! A investigação filosófica envolve perguntas, análise de argumentos e disposição para rever posições. Isso não significa aceitar qualquer resposta, mas avaliar sua fundamentação.",
+    dica: "Uma boa investigação combina curiosidade com análise de argumentos e abertura para corrigir as próprias ideias."
+  }
+];
+
+let etapa = -1;
+let acertos = 0;
+let respondendo = false;
+let pontosDaAventura = 0;
+
+function iniciar() {
+  etapa = 0;
+  mostrarDesafio();
+}
+
+function mostrarDesafio() {
+  respondendo = false;
+
+  const d = desafios[etapa];
+
+  document.getElementById("titulo").textContent = d.titulo;
+  document.getElementById("historia").textContent = d.historia;
+  document.getElementById("historia2").textContent =
+    "Observe a situação e escolha a alternativa mais bem fundamentada.";
+
+  document.getElementById("fala").innerHTML =
+    "<strong>Sofia, guardiã do conhecimento</strong>" + d.fala.replace("Sofia: ", "");
+
+  document.getElementById("pergunta").textContent = d.pergunta;
+
+  const areaDica = document.getElementById("area-dica");
+  const botaoDica = document.getElementById("botaoDica");
+  const textoDica = document.getElementById("textoDica");
+  const dicasAtivas = localStorage.getItem("dicasAtivas") !== "nao";
+  areaDica.style.display = dicasAtivas ? "block" : "none";
+  textoDica.style.display = "none";
+  textoDica.textContent = "";
+  botaoDica.disabled = false;
+  botaoDica.textContent = "💡 REVELAR DICA";
+  botaoDica.onclick = () => {
+    textoDica.textContent = d.dica;
+    textoDica.style.display = "block";
+    botaoDica.textContent = "DICA REVELADA";
+    botaoDica.disabled = true;
+  };
+
+  const area = document.getElementById("area-opcoes");
+  area.innerHTML = "";
+  area.style.display = "grid";
+
+  d.opcoes.forEach((opcao, i) => {
+    const label = document.createElement("label");
+    label.className = "opcao";
+
+    const radio = document.createElement("input");
+    radio.type = "radio";
+    radio.name = "resposta";
+    radio.value = i;
+
+    const texto = document.createElement("span");
+    texto.textContent = opcao;
+
+    label.appendChild(radio);
+    label.appendChild(texto);
+    area.appendChild(label);
+  });
+
+  document.getElementById("feedback").style.display = "none";
+  document.getElementById("acao").textContent = "CONFIRMAR RESPOSTA";
+  document.getElementById("acao").onclick = confirmarResposta;
+
+  document.getElementById("contador").textContent =
+    etapa + "/" + desafios.length;
+
+  document.getElementById("barra").style.width =
+    (etapa / desafios.length * 100) + "%";
+}
+
+function confirmarResposta() {
+  if (respondendo) {
+    proximaEtapa();
+    return;
+  }
+
+  const selecionada = document.querySelector('input[name="resposta"]:checked');
+
+  if (!selecionada) {
+    alert("Escolha uma resposta antes de continuar!");
+    return;
+  }
+
+  respondendo = true;
+
+  const d = desafios[etapa];
+  const acertou = Number(selecionada.value) === d.correta;
+
+  const feedback = document.getElementById("feedback");
+  feedback.style.display = "block";
+
+  if (acertou) {
+    acertos++;
+    pontosDaAventura += 10;
+    feedback.innerHTML =
+      "<strong>✓ Resposta correta! +10 pontos</strong><br>" + d.explicacao;
+  } else {
+    feedback.innerHTML =
+      "<strong>Vamos refletir!</strong><br>" + d.explicacao;
+  }
+
+  document.querySelectorAll('input[name="resposta"]').forEach(input => {
+    input.disabled = true;
+  });
+
+  document.getElementById("pontos").textContent = pontosDaAventura;
+  document.getElementById("contador").textContent =
+    (etapa + 1) + "/" + desafios.length;
+
+  document.getElementById("barra").style.width =
+    ((etapa + 1) / desafios.length * 100) + "%";
+
+  document.getElementById("acao").textContent =
+    etapa === desafios.length - 1 ? "CONCLUIR AVENTURA →" : "PRÓXIMO DESAFIO →";
+}
+
+function proximaEtapa() {
+  if (etapa < desafios.length - 1) {
+    etapa++;
+    mostrarDesafio();
+  } else {
+    concluirAventura();
+  }
+}
+
+function concluirAventura() {
+  document.getElementById("titulo").textContent = "A biblioteca reconhece você!";
+  document.getElementById("historia").textContent =
+    "As portas douradas se abrem. Os livros deixam de flutuar desordenadamente e formam uma trilha luminosa até a saída. Você aprendeu que conhecer não é apenas acreditar: é investigar e avaliar razões.";
+  document.getElementById("historia2").textContent =
+    "Sofia sorri. 'Você não precisa ter resposta para tudo. Precisa ter coragem para perguntar e honestidade para examinar as respostas.'";
+
+  document.getElementById("fala").innerHTML =
+    "<strong>Sofia</strong> 'O conhecimento cresce quando a curiosidade encontra a reflexão. Continue questionando, viajante!'";
+
+  document.getElementById("pergunta").textContent =
+    "Desafios corretos: " + acertos + " de " + desafios.length +
+    ". Pontos conquistados nesta aventura: " + pontosDaAventura + ".";
+
+  document.getElementById("area-opcoes").style.display = "none";
+  document.getElementById("area-dica").style.display = "none";
+  document.getElementById("feedback").style.display = "none";
+  document.getElementById("acao").textContent = "VOLTAR AO MAPA";
+  document.getElementById("acao").onclick = voltarMapa;
+
+  document.getElementById("barra").style.width = "100%";
+
+  // Registra a conclusão da região para o mapa.
+  localStorage.setItem("reinoConhecimentoConcluido", "sim");
+
+  // Soma os pontos desta aventura apenas uma vez.
+  if (localStorage.getItem("reinoPontosAdicionados") !== "sim") {
+    const totalAnterior = Number(
+      localStorage.getItem("pontosFilosofia") || 0
+    );
+
+    localStorage.setItem(
+      "pontosFilosofia",
+      totalAnterior + pontosDaAventura
+    );
+
+    localStorage.setItem("reinoPontosAdicionados", "sim");
+  }
+
+  document.getElementById("pontos").textContent = pontosDaAventura;
+}
+
+function voltarMapa() {
+  window.location.href = "mapa.html";
+}
+</script>
+
+</body>
+</html>

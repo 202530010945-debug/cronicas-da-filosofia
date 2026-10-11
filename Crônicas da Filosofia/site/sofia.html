@@ -1,0 +1,630 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Encontro com Sofia | Crônicas da Filosofia</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(
+                ellipse at 50% 30%,
+                #35435a,
+                #151827 55%,
+                #06070d
+            );
+            color: #f5e8c8;
+            font-family: Georgia, serif;
+        }
+
+        main {
+            max-width: 850px;
+            min-height: 100vh;
+            margin: auto;
+            padding: 35px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .local {
+            color: #e5c45c;
+            font-size: 12px;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: clamp(30px, 6vw, 48px);
+            letter-spacing: 4px;
+        }
+
+        #introducao {
+            max-width: 650px;
+            margin: 20px 0;
+            color: #d0c8bb;
+            line-height: 1.8;
+        }
+
+        .retrato {
+            width: 125px;
+            height: 150px;
+            object-fit: cover;
+            border: 2px solid #c9a227;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .dialogo {
+            width: 100%;
+            padding: 25px;
+            background: #090b12dd;
+            border: 1px solid #8f7520;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        #autor {
+            color: #e5c45c;
+            font-size: 13px;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+
+        #texto {
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        #pergunta {
+            margin: 25px 0 15px;
+            line-height: 1.7;
+            font-size: 19px;
+        }
+
+        #alternativas {
+            display: grid;
+            gap: 10px;
+        }
+
+        .alternativa {
+            width: 100%;
+            margin: 0;
+            padding: 14px;
+            text-align: left;
+            line-height: 1.5;
+            letter-spacing: 0;
+            background: #171c2a;
+            color: #f5e8c8;
+            border: 1px solid #5b5543;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .alternativa:hover:not(:disabled) {
+            border-color: #e5c45c;
+            background: #252b3c;
+        }
+
+        .alternativa:disabled {
+            cursor: default;
+            opacity: 0.85;
+        }
+
+        #feedback {
+            margin-top: 18px;
+            padding: 15px;
+            line-height: 1.7;
+            border-radius: 6px;
+            background: #171c2a;
+        }
+
+        .escondido {
+            display: none;
+        }
+
+        #avancar {
+            display: block;
+            margin: 22px auto 0;
+            padding: 14px 22px;
+            background: transparent;
+            color: #e5c45c;
+            border: 1px solid #c9a227;
+            border-radius: 5px;
+            font-family: Georgia, serif;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        #avancar:hover {
+            background: #c9a227;
+            color: #08090d;
+        }
+
+        #progresso {
+            margin-top: 20px;
+            color: #aaa5a0;
+            font-size: 13px;
+        }
+
+        #pontuacao {
+            margin-top: 8px;
+            color: #e5c45c;
+            font-size: 14px;
+        }
+
+        
+/* ===== SANTUÁRIO DO CONHECIMENTO ===== */
+
+body {
+    background: #080d19;
+    color: #f5e8c8;
+}
+
+/* Cenário de fundo */
+body:has(main) {
+    background:
+        linear-gradient(
+            90deg,
+            rgba(5, 9, 20, 0.40),
+            rgba(5, 9, 20, 0.16),
+            rgba(5, 9, 20, 0.42)
+        ),
+        linear-gradient(
+            0deg,
+            rgba(5, 9, 20, 0.65),
+            transparent 70%
+        ),
+        url("santuario-conhecimento.png")
+        center center / cover fixed no-repeat;
+}
+
+/* Conteúdo principal */
+main {
+    position: relative;
+    max-width: 900px;
+    padding: 55px 24px;
+}
+
+/* Nome do local */
+.local {
+    color: #e5c45c;
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-shadow: 0 2px 10px #000;
+}
+
+/* Título de Sofia */
+h1 {
+    color: #f5e8c8;
+    font-size: clamp(38px, 6vw, 58px);
+    letter-spacing: 6px;
+    text-shadow:
+        0 3px 8px #000,
+        0 0 25px rgba(229, 196, 92, 0.2);
+}
+
+/* Introdução narrativa */
+#introducao {
+    color: #e1d9c9;
+    text-shadow: 0 2px 8px #000;
+}
+
+/* Retrato do personagem */
+.retrato {
+    border: 2px solid #d5b45e;
+    border-radius: 4px;
+    box-shadow: 0 0 24px rgba(213, 180, 94, 0.18);
+}
+
+/* Caixa de diálogo */
+.dialogo {
+    background: linear-gradient(
+        135deg,
+        rgba(8, 13, 27, 0.96),
+        rgba(20, 24, 39, 0.94)
+    );
+    border: 1px solid #b99a4e;
+    border-radius: 3px;
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.40),
+        inset 0 0 25px rgba(201, 166, 83, 0.04);
+}
+
+/* Nome de quem está falando */
+#autor {
+    color: #e5c45c;
+    letter-spacing: 4px;
+}
+
+/* Texto do diálogo */
+#texto {
+    color: #eee4d0;
+}
+
+/* Perguntas */
+#pergunta {
+    color: #f0d995;
+}
+
+/* Alternativas */
+.alternativa {
+    background: rgba(22, 29, 45, 0.96);
+    color: #f5e8c8;
+    border: 1px solid #665a3d;
+    border-radius: 3px;
+    transition: 0.25s ease;
+}
+
+.alternativa:hover:not(:disabled) {
+    background: rgba(43, 48, 62, 0.98);
+    border-color: #e5c45c;
+    transform: translateX(4px);
+}
+
+/* Feedback da resposta */
+#feedback {
+    background: rgba(25, 31, 46, 0.98);
+    border-left: 3px solid #d5b45e;
+    color: #eee4d0;
+}
+
+/* Botão de continuar */
+#avancar {
+    background: linear-gradient(
+        110deg,
+        #a27a2c,
+        #f0d995,
+        #b28a39
+    );
+    color: #171522;
+    border: 1px solid #f0d995;
+    border-radius: 2px;
+    font-weight: bold;
+    transition: 0.25s ease;
+}
+
+#avancar:hover:not(:disabled) {
+    filter: brightness(1.12);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(229, 196, 92, 0.22);
+}
+
+#avancar:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+/* Progresso e pontuação */
+#progresso {
+    color: #d1c8b5;
+}
+
+#pontuacao {
+    color: #e5c45c;
+}
+
+/* Ajustes para celular */
+@media (max-width: 600px) {
+    body:has(main) {
+        background-attachment: scroll;
+        background-position: center;
+    }
+
+    main {
+        padding: 35px 16px;
+    }
+
+    .dialogo {
+        padding: 20px 16px;
+    }
+
+    #texto {
+        font-size: 16px;
+    }
+
+    #pergunta {
+        font-size: 18px;
+    }
+
+    .local {
+        letter-spacing: 3px;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+<main>
+    <p class="local">SANTUÁRIO DO CONHECIMENTO</p>
+
+    <h1>SOFIA</h1>
+
+    <p id="introducao">
+        No centro de uma construção circular, uma mulher observa
+        símbolos dourados que flutuam sobre um livro antigo.
+        Ao perceber sua presença, ela ergue os olhos.
+    </p>
+
+    <img id="retrato" class="retrato escondido" alt="Personagem do jogo">
+
+    <section class="dialogo">
+        <p id="autor">SOFIA</p>
+
+        <p id="texto">
+            Bem-vindo, viajante. Antes de seguir sua jornada,
+            quero descobrir como você enxerga o mundo.
+        </p>
+
+        <div id="area-pergunta" class="escondido">
+            <h2 id="pergunta"></h2>
+            <div id="alternativas"></div>
+            <div id="feedback" class="escondido" aria-live="polite"></div>
+        </div>
+
+        <button id="avancar">CONTINUAR</button>
+    </section>
+
+    <p id="progresso">Capítulo 1 — O encontro</p>
+    <p id="pontuacao">Conhecimento: 0 pontos</p>
+</main>
+
+<script>
+    const nome = localStorage.getItem("nomeJogador") || "Viajante";
+    const imagemEscolhida = localStorage.getItem("personagemEscolhido");
+
+    const introducao = document.getElementById("introducao");
+    const autor = document.getElementById("autor");
+    const texto = document.getElementById("texto");
+    const areaPergunta = document.getElementById("area-pergunta");
+    const pergunta = document.getElementById("pergunta");
+    const alternativas = document.getElementById("alternativas");
+    const feedback = document.getElementById("feedback");
+    const avancar = document.getElementById("avancar");
+    const progresso = document.getElementById("progresso");
+    const pontuacaoTexto = document.getElementById("pontuacao");
+    const retrato = document.getElementById("retrato");
+
+    const imagemPersonagem = localStorage.getItem("personagemEscolhido");
+
+    if (imagemPersonagem) {
+        retrato.src = "personagens/" + imagemPersonagem;
+        retrato.alt = "Personagem " + nome;
+        retrato.classList.remove("escondido");
+    }
+
+    const etapas = [
+        {
+            tipo: "dialogo",
+            autor: "SOFIA",
+            texto: "Diga-me, " + nome + ": quando alguém afirma que algo é verdade, você acredita imediatamente ou procura entender por quê?",
+            introducao: "Sofia fecha o livro antigo. As luzes douradas se aproximam, como se também esperassem sua resposta.",
+            progresso: "Capítulo 1 — A curiosidade"
+        },
+        {
+            tipo: "pergunta",
+            autor: "SOFIA",
+            texto: "Vamos começar com uma situação simples.",
+            introducao: "Uma inscrição aparece no ar. Sofia pede que você examine a afirmação antes de decidir.",
+            progresso: "Missão 1 — Pensar por si",
+            pergunta: "Uma pessoa diz que uma ideia é verdadeira porque todo mundo acredita nela. Qual atitude é mais filosófica?",
+            opcoes: [
+                {
+                    texto: "A) Aceitar, porque a maioria sempre tem razão.",
+                    correta: false,
+                    explicacao: "Muitas pessoas podem estar enganadas. A quantidade de pessoas que acredita em algo não prova, sozinha, que isso seja verdadeiro."
+                },
+                {
+                    texto: "B) Investigar as razões e procurar evidências.",
+                    correta: true,
+                    explicacao: "Muito bem! A filosofia incentiva o questionamento, a análise de argumentos e a busca por boas razões para aceitar uma ideia."
+                },
+                {
+                    texto: "C) Rejeitar a ideia sem nem pensar sobre ela.",
+                    correta: false,
+                    explicacao: "Questionar não significa rejeitar tudo. O importante é examinar a ideia e avaliar as razões apresentadas."
+                },
+                {
+                    texto: "D) Acreditar apenas porque um amigo disse.",
+                    correta: false,
+                    explicacao: "A confiança em alguém não substitui a investigação. Podemos ouvir outras pessoas e ainda analisar suas justificativas."
+                }
+            ]
+        },
+        {
+            tipo: "pergunta",
+            autor: "SOFIA",
+            texto: "Você começou a perceber que pensar exige mais do que repetir o que os outros dizem.",
+            introducao: "Sofia desenha duas palavras no ar: FILOSOFIA e SABEDORIA.",
+            progresso: "Missão 1 — O significado da filosofia",
+            pergunta: "A palavra filosofia tem origem grega. Qual alternativa apresenta seu significado mais conhecido?",
+            opcoes: [
+                {
+                    texto: "A) Amor à riqueza.",
+                    correta: false,
+                    explicacao: "Essa não é a origem tradicionalmente ensinada para a palavra filosofia."
+                },
+                {
+                    texto: "B) Medo do desconhecido.",
+                    correta: false,
+                    explicacao: "O medo do desconhecido pode ser um tema de reflexão, mas não é o significado da palavra filosofia."
+                },
+                {
+                    texto: "C) Amor ou amizade pela sabedoria.",
+                    correta: true,
+                    explicacao: "Correto! Phílos está ligado a amor ou amizade, e sophía significa sabedoria. Filosofia é tradicionalmente entendida como amor à sabedoria."
+                },
+                {
+                    texto: "D) Estudo exclusivo dos deuses.",
+                    correta: false,
+                    explicacao: "A filosofia investiga muitas questões: conhecimento, realidade, ética, política, existência e muito mais."
+                }
+            ]
+        },
+        {
+            tipo: "pergunta",
+            autor: "SOFIA",
+            texto: "Agora vamos pensar no que significa filosofar.",
+            introducao: "As luzes formam uma trilha que atravessa o salão e leva a uma porta desconhecida.",
+            progresso: "Missão 1 — A atitude filosófica",
+            pergunta: "Qual situação mostra melhor uma atitude filosófica?",
+            opcoes: [
+                {
+                    texto: "A) Decorar uma opinião sem entender seus motivos.",
+                    correta: false,
+                    explicacao: "Memorizar pode ajudar nos estudos, mas a atitude filosófica também exige compreender e examinar as ideias."
+                },
+                {
+                    texto: "B) Fazer perguntas, analisar ideias e avaliar argumentos.",
+                    correta: true,
+                    explicacao: "Isso mesmo! Filosofar envolve perguntar, investigar, argumentar e considerar diferentes pontos de vista."
+                },
+                {
+                    texto: "C) Nunca mudar de opinião, mesmo diante de novas razões.",
+                    correta: false,
+                    explicacao: "Uma pessoa pode rever suas ideias quando encontra argumentos ou evidências melhores. Isso faz parte de uma investigação cuidadosa."
+                },
+                {
+                    texto: "D) Concordar com a primeira resposta que ouvir.",
+                    correta: false,
+                    explicacao: "A primeira resposta pode estar certa ou errada. O importante é examinar as razões antes de chegar a uma conclusão."
+                }
+            ]
+        },
+        {
+            tipo: "final",
+            autor: "SOFIA",
+            texto: "Você deu seus primeiros passos no caminho da filosofia. Lembre-se: não basta ter respostas; também precisamos saber fazer boas perguntas.",
+            introducao: "A porta se abre. Além dela, novas terras aguardam viajantes dispostos a investigar os mistérios do mundo.",
+            progresso: "Missão 1 — Concluída"
+        }
+    ];
+
+    let etapaAtual = 0;
+    let pontos = 0;
+    let respondeu = false;
+
+    function atualizarPontuacao() {
+        pontuacaoTexto.textContent = "Conhecimento: " + pontos + " pontos";
+    }
+
+    function mostrarEtapa() {
+        const etapa = etapas[etapaAtual];
+
+        autor.textContent = etapa.autor;
+        texto.textContent = etapa.texto;
+        introducao.textContent = etapa.introducao;
+        progresso.textContent = etapa.progresso;
+
+        areaPergunta.classList.add("escondido");
+        alternativas.innerHTML = "";
+        feedback.classList.add("escondido");
+        respondeu = false;
+
+        if (etapa.tipo === "pergunta") {
+            areaPergunta.classList.remove("escondido");
+            pergunta.textContent = etapa.pergunta;
+
+            etapa.opcoes.forEach(function(opcao) {
+                const botao = document.createElement("button");
+                botao.className = "alternativa";
+                botao.textContent = opcao.texto;
+
+                botao.addEventListener("click", function() {
+                    if (respondeu) return;
+
+                    respondeu = true;
+
+                    if (opcao.correta) {
+                        pontos += 10;
+                        feedback.textContent = "Resposta correta! " + opcao.explicacao;
+                    } else {
+                        feedback.textContent = "Ainda não! " + opcao.explicacao;
+                    }
+
+                    atualizarPontuacao();
+                    feedback.classList.remove("escondido");
+
+                   alternativas.querySelectorAll("button").forEach(function(item) {
+    item.disabled = true;
+});
+
+avancar.disabled = false;
+avancar.textContent = "PRÓXIMA ETAPA";
+                });
+                
+                alternativas.appendChild(botao);
+            });
+
+            avancar.textContent = "ESCOLHA UMA RESPOSTA";
+            avancar.disabled = true;
+        } else {
+            avancar.disabled = false;
+
+            if (etapa.tipo === "final") {
+                avancar.textContent = "CONCLUIR MISSÃO";
+            } else {
+                avancar.textContent = "CONTINUAR";
+            }
+        }
+    }
+
+    avancar.addEventListener("click", function() {
+        const etapa = etapas[etapaAtual];
+
+        if (etapa.tipo === "pergunta" && !respondeu) {
+            return;
+        }
+
+        if (etapa.tipo === "final") {
+          
+if (localStorage.getItem("missao1Concluida") !== "sim") {
+    const pontosSalvos = Number(
+        localStorage.getItem("pontosFilosofia") || 0
+    );
+
+    localStorage.setItem(
+        "pontosFilosofia",
+        pontosSalvos + pontos
+    );
+
+    localStorage.setItem("missao1Concluida", "sim");
+
+    alert(
+        "Missão concluída! Você conquistou " +
+        pontos +
+        " pontos de conhecimento."
+    );
+} else {
+    alert(
+        "Você já concluiu esta missão. " +
+        "Seus pontos não foram adicionados novamente."
+    );
+}
+
+
+window.location.href = "mapa.html";
+return;
+
+
+        }
+
+        etapaAtual++;
+        mostrarEtapa();
+    });
+
+    mostrarEtapa();
+</script>
+</body>
+</html>

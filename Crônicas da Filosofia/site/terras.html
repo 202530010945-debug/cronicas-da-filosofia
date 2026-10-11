@@ -1,0 +1,816 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terras das Grandes Questões | Crônicas da Filosofia</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Georgia, "Times New Roman", serif;
+  color: #f4edda;
+
+  background:
+    linear-gradient(
+      rgba(8, 10, 24, 0.60),
+      rgba(12, 11, 27, 0.82)
+    ),
+    url("terras-grandes-questoes.png")
+      center center / cover fixed no-repeat;
+}
+
+
+    header {
+      padding: 28px 18px;
+      text-align: center;
+      border-bottom: 1px solid #b99a55;
+      background: rgba(7, 11, 20, 0.65);
+    }
+
+    .voltar {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: #e8ca80;
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+    }
+
+    .voltar:hover {
+      color: white;
+    }
+
+    .simbolo {
+      font-size: 42px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      margin: 0;
+      color: #e8ca80;
+      font-size: clamp(26px, 5vw, 42px);
+    }
+
+    header p {
+      color: #c7c2d0;
+      line-height: 1.6;
+    }
+
+    main {
+      width: min(850px, 92%);
+      margin: 28px auto;
+    }
+
+    .painel {
+      padding: 24px;
+      margin-bottom: 22px;
+      background: rgba(19, 23, 39, 0.88);
+      border: 1px solid #766443;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px #0005;
+    }
+
+    h2 {
+      color: #e8ca80;
+      margin-top: 0;
+    }
+
+    h3 {
+      color: #e8ca80;
+      line-height: 1.5;
+    }
+
+    p {
+      line-height: 1.75;
+    }
+
+    .progresso-fundo {
+      width: 100%;
+      height: 9px;
+      margin: 14px 0;
+      overflow: hidden;
+      background: #343246;
+      border-radius: 20px;
+    }
+
+    #barraProgresso {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #9e7b36, #f0d68f);
+      transition: width 0.3s;
+    }
+
+    .informacoes {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      color: #d6cba9;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    .regiao {
+      display: inline-block;
+      padding: 6px 11px;
+      margin-bottom: 10px;
+      color: #e8ca80;
+      background: #3b3046;
+      border: 1px solid #766443;
+      border-radius: 20px;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+    }
+
+    .dialogo {
+      padding: 16px;
+      margin: 18px 0;
+      color: #e4d8b9;
+      background: #25243a;
+      border-left: 4px solid #c6a65c;
+      border-radius: 5px;
+      line-height: 1.8;
+    }
+
+    .alternativa {
+      display: block;
+      width: 100%;
+      padding: 14px 16px;
+      margin: 10px 0;
+      text-align: left;
+      color: #f4edda;
+      background: #292b40;
+      border: 1px solid #56516a;
+      border-radius: 9px;
+      font-size: 15px;
+      line-height: 1.5;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .alternativa:hover:not(:disabled) {
+      background: #3c3a53;
+      border-color: #e8ca80;
+      transform: translateY(-1px);
+    }
+
+    .alternativa:disabled {
+      cursor: default;
+      opacity: 0.95;
+    }
+
+    .alternativa.correta {
+      background: #234534;
+      border-color: #70c997;
+    }
+
+    .alternativa.errada {
+      background: #512d36;
+      border-color: #d98787;
+    }
+
+    #feedback {
+      padding: 16px;
+      margin-top: 18px;
+      border-radius: 9px;
+      line-height: 1.7;
+      background: #292b40;
+    }
+
+    .escondido {
+      display: none;
+    }
+
+    .botao {
+      display: inline-block;
+      padding: 13px 20px;
+      margin-top: 14px;
+      color: #191724;
+      background: linear-gradient(135deg, #e8ca80, #b28a42);
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .botao:hover {
+      filter: brightness(1.12);
+    }
+
+    .botao-secundario {
+      color: #f4edda;
+      background: #39364d;
+      border: 1px solid #766443;
+    }
+
+    .nota {
+      color: #c7c2d0;
+      font-size: 13px;
+    }
+
+    footer {
+      padding: 20px;
+      text-align: center;
+      color: #9d9aab;
+      font-size: 12px;
+    }
+
+    @media (max-width: 500px) {
+      .painel {
+        padding: 18px;
+      }
+
+      .alternativa {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <a class="voltar" href="mapa.html">← Voltar ao mapa</a>
+  <div class="simbolo">🏛️</div>
+  <h1>Terras das Grandes Questões</h1>
+  <p>Onde as certezas são desafiadas e o pensamento ganha vida.</p>
+</header>
+
+<main>
+
+  <section class="painel" id="introducao">
+    <span class="regiao">CAPÍTULO 4</span>
+    <h2>O chamado dos antigos sábios</h2>
+
+    <p id="saudacao"></p>
+
+    <div class="dialogo">
+      <strong>Guardião das Grandes Questões:</strong><br>
+      Viajante, você chegou a uma terra onde ninguém deve aceitar
+      uma explicação simplesmente porque ela parece convincente.
+      Aqui, os primeiros filósofos investigaram a natureza, os
+      sofistas questionaram a relação entre verdade e persuasão,
+      e diferentes escolas buscaram respostas para uma grande
+      pergunta: como devemos viver?
+    </div>
+
+    <p>
+      Sua missão será atravessar três jornadas:
+      <strong>os investigadores da natureza</strong>,
+      <strong>o poder das palavras</strong> e
+      <strong>a busca pela felicidade</strong>.
+    </p>
+
+    <p>
+      Cada resposta correta vale 10 pontos. Leia as explicações:
+      elas fazem parte do aprendizado e podem ajudar nas próximas missões.
+    </p>
+
+    <button class="botao" onclick="iniciarAventura()">
+      INICIAR A JORNADA
+    </button>
+  </section>
+
+  <section class="painel escondido" id="painelDesafio">
+    <div class="informacoes">
+      <span id="nomeMissao">Missão 1</span>
+      <span id="numeroPergunta">Pergunta 1 de 9</span>
+    </div>
+
+    <div class="progresso-fundo">
+      <div id="barraProgresso"></div>
+    </div>
+
+    <div class="informacoes">
+      <span id="nomeJogador"></span>
+      <span>Pontos nesta aventura: <strong id="pontuacao">0</strong></span>
+    </div>
+
+    <div class="dialogo" id="dialogoPersonagem"></div>
+    
+<div id="areaDica" class="escondido">
+  <button class="botao botao-secundario" id="botaoDica" onclick="revelarDica()">
+    💡 REVELAR DICA
+  </button>
+  <p id="textoDica" class="dialogo escondido" aria-live="polite"></p>
+</div>
+
+
+    <h3 id="pergunta"></h3>
+    <div id="alternativas"></div>
+
+    <div id="feedback" class="escondido" aria-live="polite"></div>
+
+    <button
+      class="botao escondido"
+      id="botaoContinuar"
+      onclick="proximaPergunta()">
+      PRÓXIMO DESAFIO
+    </button>
+  </section>
+
+  <section class="painel escondido" id="conclusao">
+    <div class="simbolo">🏆</div>
+    <h2>Jornada concluída!</h2>
+
+    <div class="dialogo">
+      <strong>Guardião das Grandes Questões:</strong><br>
+      Você investigou a natureza, questionou o poder das palavras
+      e conheceu diferentes caminhos para uma vida boa.
+      Lembre-se: filosofar não é decorar respostas.
+      É aprender a perguntar, examinar razões e pensar com cuidado.
+    </div>
+
+    <p id="resultadoFinal"></p>
+    <p id="mensagemFinal"></p>
+
+    <button class="botao" onclick="voltarAoMapa()">
+      RETORNAR AO MAPA
+    </button>
+
+    <button class="botao botao-secundario" onclick="location.reload()">
+      JOGAR NOVAMENTE
+    </button>
+  </section>
+
+</main>
+
+<footer>
+  CRÔNICAS DA FILOSOFIA · O conhecimento é uma jornada.
+</footer>
+
+<script>
+  const nomeSalvo = localStorage.getItem("nomeJogador") || "Viajante";
+
+  document.getElementById("saudacao").textContent =
+    "Prepare-se, " + nomeSalvo +
+    ". As respostas que você procura não serão encontradas sem investigação.";
+
+  document.getElementById("nomeJogador").textContent =
+    "Viajante: " + nomeSalvo;
+
+  const missoes = [
+    {
+      nome: "Missão 1 — Os primeiros investigadores",
+      dialogo:
+        "Um estudioso da natureza se aproxima. Ele quer descobrir " +
+        "qual princípio poderia explicar a origem de todas as coisas.",
+      perguntas: [
+        {
+          pergunta:
+            "1. Tales de Mileto ficou conhecido por defender que princípio fundamental da natureza?",
+
+          alternativas: [
+            "A água.",
+            "O fogo, exclusivamente.",
+            "Os átomos indivisíveis.",
+            "As Ideias perfeitas de um mundo separado."
+          ],
+
+          correta: 0,
+
+          explicacao:
+            "Tales de Mileto é tradicionalmente associado à ideia de que " +
+            "a água seria o princípio fundamental (arché) de todas as coisas. " +
+            "Sua importância está na tentativa de explicar a natureza por " +
+            "um princípio racional, em vez de recorrer apenas a narrativas míticas."
+        },
+        {
+          pergunta:
+            "2. Heráclito é frequentemente associado a qual ideia?",
+
+          alternativas: [
+            "Nada muda de verdade; toda mudança é uma ilusão.",
+            "A realidade está em constante transformação.",
+            "Somente a água existe.",
+            "A felicidade depende de possuir riquezas."
+          ],
+
+          correta: 1,
+
+          explicacao:
+            "Heráclito destacou a transformação e a tensão entre opostos " +
+            "na realidade. Sua filosofia é frequentemente resumida pela ideia " +
+            "de que tudo flui, embora essa frase seja uma síntese posterior " +
+            "do seu pensamento."
+        },
+        {
+          pergunta:
+            "3. Qual é a principal ideia associada a Parmênides?",
+
+          alternativas: [
+            "Tudo muda a todo instante e nada permanece.",
+            "A realidade é formada apenas por água.",
+            "O ser é; a mudança, tal como percebida pelos sentidos, precisa ser questionada.",
+            "A verdade é sempre aquilo em que a maioria acredita."
+          ],
+
+          correta: 2,
+
+          explicacao:
+            "Parmênides argumentou que o ser não pode surgir do nada nem " +
+            "simplesmente deixar de ser. Por isso, questionou a confiança " +
+            "nas aparências de mudança percebidas pelos sentidos. Sua filosofia " +
+            "contrasta com a ênfase de Heráclito na transformação."
+        },
+        {
+          pergunta:
+            "4. O que Demócrito propôs para explicar a constituição da matéria?",
+
+          alternativas: [
+            "Que tudo foi criado pelas opiniões humanas.",
+            "Que a matéria é composta por átomos e vazio.",
+            "Que apenas os deuses podem explicar a natureza.",
+            "Que o mundo material não existe."
+          ],
+
+          correta: 1,
+
+          explicacao:
+            "Demócrito, associado ao atomismo antigo, defendia que a matéria " +
+            "é composta por átomos e vazio. Esses átomos eram considerados " +
+            "indivisíveis em sua teoria. Não se trata exatamente do modelo " +
+            "científico atual, mas de uma importante proposta filosófica."
+        }
+      ]
+    },
+    {
+      nome: "Missão 2 — O poder das palavras",
+      dialogo:
+        "Na praça da cidade, mestres da argumentação ensinam os cidadãos " +
+        "a falar em público. Você precisa descobrir como avaliar seus discursos.",
+      perguntas: [
+        {
+          pergunta:
+            "5. Quem eram os sofistas na Grécia Antiga?",
+
+          alternativas: [
+            "Pensadores que ensinavam, entre outras coisas, retórica e argumentação.",
+            "Um grupo de cientistas que inventou os computadores.",
+            "Sacerdotes que proibiam qualquer debate público.",
+            "Filósofos que defendiam todos exatamente a mesma teoria."
+          ],
+
+          correta: 0,
+
+          explicacao:
+            "Os sofistas eram mestres e pensadores que ensinavam habilidades " +
+            "como retórica e argumentação, muitas vezes mediante pagamento. " +
+            "Eles tiveram papel importante na educação e nos debates públicos " +
+            "das cidades gregas."
+        },
+        {
+          pergunta:
+            "6. O que é retórica?",
+
+          alternativas: [
+            "A capacidade de decorar nomes de filósofos.",
+            "O estudo exclusivo das estrelas.",
+            "A arte de construir discursos para persuadir um público.",
+            "A afirmação de que nenhuma pergunta pode ser respondida."
+          ],
+
+          correta: 2,
+
+          explicacao:
+            "Retórica é a arte e o estudo da construção de discursos persuasivos. " +
+            "Ela pode ser usada para defender ideias de maneira fundamentada, " +
+            "mas também pode ser usada para manipular. Por isso, é importante " +
+            "examinar as razões e as evidências apresentadas."
+        },
+        {
+          pergunta:
+            "7. Uma pessoa afirma: 'Todo mundo acredita nisso, portanto é verdade'. Qual é o problema desse argumento?",
+
+          alternativas: [
+            "Ele apresenta provas científicas suficientes.",
+            "Ele confunde a popularidade de uma ideia com sua verdade.",
+            "Ele demonstra que a maioria nunca erra.",
+            "Ele prova que todas as opiniões são igualmente verdadeiras."
+          ],
+
+          correta: 1,
+
+          explicacao:
+            "Uma ideia não se torna verdadeira apenas porque muitas pessoas " +
+            "acreditam nela. Precisamos examinar as razões e as evidências. " +
+            "Esse exemplo também se aproxima da falácia de apelo à popularidade, " +
+            "conhecida como argumento ad populum."
+        }
+      ]
+    },
+    {
+      nome: "Missão 3 — A busca pela felicidade",
+      dialogo:
+        "Ao anoitecer, três viajantes encontram você. Cada um oferece um " +
+        "caminho diferente para viver melhor. Escute suas ideias antes de escolher.",
+      perguntas: [
+        {
+          pergunta:
+            "8. Qual é uma ideia central do estoicismo?",
+
+          alternativas: [
+            "Devemos controlar todos os acontecimentos externos.",
+            "A riqueza é a única fonte de felicidade.",
+            "A felicidade exige evitar qualquer dificuldade.",
+            "Devemos distinguir o que depende de nós daquilo que não depende e cultivar a virtude."
+          ],
+
+          correta: 3,
+
+          explicacao:
+            "Os estoicos, como Epicteto, enfatizaram a diferença entre aquilo " +
+            "que depende de nós — como nossos julgamentos e escolhas — e aquilo " +
+            "que não controlamos. Eles valorizavam a virtude e o exercício " +
+            "racional diante das dificuldades."
+        },
+        {
+          pergunta:
+            "9. O que o epicurismo considera importante para uma vida feliz?",
+
+          alternativas: [
+            "Buscar prazeres sem qualquer limite ou reflexão.",
+            "Cultivar prazeres equilibrados, reduzir sofrimentos e valorizar a tranquilidade.",
+            "Acumular riquezas acima de tudo.",
+            "Viver com medo constante dos deuses."
+          ],
+
+          correta: 1,
+
+          explicacao:
+            "Epicuro defendia que a felicidade está relacionada ao prazer, " +
+            "mas não à busca descontrolada de qualquer desejo. Ele valorizava " +
+            "a tranquilidade da mente, a amizade e a redução de sofrimentos " +
+            "desnecessários."
+        },
+        {
+          pergunta:
+            "10. Qual atitude se aproxima do pensamento dos cínicos antigos?",
+
+          alternativas: [
+            "Considerar a riqueza e o prestígio indispensáveis para a felicidade.",
+            "Obedecer a toda convenção social sem questionar.",
+            "Questionar convenções sociais e valorizar uma vida simples e autossuficiente.",
+            "Afirmar que pensar sobre a vida não tem utilidade."
+          ],
+
+          correta: 2,
+
+          explicacao:
+            "Os cínicos antigos, como Diógenes de Sinope, criticavam convenções " +
+            "sociais e valorizavam a simplicidade e a autossuficiência. " +
+            "Buscavam uma vida menos dependente de riqueza, status e aprovação social."
+        }
+      ]
+    }
+  ];
+
+  
+const dicasPerguntas = [
+  "Tales procurava um princípio natural para explicar a origem de tudo.",
+  "Heráclito é lembrado pela ideia de que a realidade está sempre mudando.",
+  "Parmênides questionava se a mudança percebida pelos sentidos era realmente possível.",
+  "Demócrito propôs partículas muito pequenas e o vazio.",
+  "Os sofistas ensinavam habilidades úteis para os debates e a vida pública.",
+  "A retórica está relacionada à construção de discursos persuasivos.",
+  "Uma ideia popular não é necessariamente verdadeira: precisamos de evidências.",
+  "Para os estoicos, diferenciar o que controlamos do que não controlamos é importante.",
+  "Epicuro valorizava prazeres equilibrados, amizade e tranquilidade.",
+  "Os cínicos questionavam convenções sociais e valorizavam uma vida simples."
+];
+
+function revelarDica() {
+  const texto = document.getElementById("textoDica");
+  texto.textContent = dicasPerguntas[
+    missoes.slice(0, indiceMissao)
+      .reduce((total, missao) => total + missao.perguntas.length, 0)
+      + indicePergunta
+  ];
+
+  texto.classList.remove("escondido");
+  document.getElementById("botaoDica").disabled = true;
+}
+
+
+  let indiceMissao = 0;
+  let indicePergunta = 0;
+  let pontosDaAventura = 0;
+  let respondida = false;
+
+  const totalPerguntas = missoes.reduce(
+    (total, missao) => total + missao.perguntas.length,
+    0
+  );
+
+  function iniciarAventura() {
+    document.getElementById("introducao").classList.add("escondido");
+    document.getElementById("painelDesafio").classList.remove("escondido");
+    mostrarPergunta();
+  }
+function mostrarPergunta() {
+  respondida = false;
+
+  const areaDica = document.getElementById("areaDica");
+  const botaoDica = document.getElementById("botaoDica");
+  const textoDica = document.getElementById("textoDica");
+
+  const dicasAtivas = localStorage.getItem("dicasAtivas") !== "nao";
+
+  areaDica.classList.toggle("escondido", !dicasAtivas);
+  botaoDica.disabled = false;
+  textoDica.textContent = "";
+  textoDica.classList.add("escondido");
+
+  const missao = missoes[indiceMissao];
+    const questao = missao.perguntas[indicePergunta];
+
+    const numeroGeral = missoes
+      .slice(0, indiceMissao)
+      .reduce((total, item) => total + item.perguntas.length, 0)
+      + indicePergunta + 1;
+
+    document.getElementById("nomeMissao").textContent = missao.nome;
+    document.getElementById("numeroPergunta").textContent =
+      "Pergunta " + numeroGeral + " de " + totalPerguntas;
+
+    document.getElementById("barraProgresso").style.width =
+      ((numeroGeral - 1) / totalPerguntas * 100) + "%";
+
+    document.getElementById("dialogoPersonagem").textContent =
+      missao.dialogo;
+
+    document.getElementById("pergunta").textContent =
+      questao.pergunta;
+
+    document.getElementById("pontuacao").textContent =
+      pontosDaAventura;
+
+    document.getElementById("feedback").classList.add("escondido");
+    document.getElementById("botaoContinuar").classList.add("escondido");
+
+    const caixaAlternativas = document.getElementById("alternativas");
+    caixaAlternativas.innerHTML = "";
+
+    questao.alternativas.forEach((alternativa, indice) => {
+      const botao = document.createElement("button");
+
+      botao.className = "alternativa";
+      botao.textContent =
+        String.fromCharCode(65 + indice) + ") " + alternativa;
+
+      botao.onclick = () => responder(indice, botao);
+
+      caixaAlternativas.appendChild(botao);
+    });
+  }
+
+  function responder(indiceEscolhido, botaoEscolhido) {
+    if (respondida) return;
+
+    respondida = true;
+
+    const missao = missoes[indiceMissao];
+    const questao = missao.perguntas[indicePergunta];
+    const botoes = document.querySelectorAll(".alternativa");
+    const acertou = indiceEscolhido === questao.correta;
+
+    botoes.forEach((botao, indice) => {
+      botao.disabled = true;
+
+      if (indice === questao.correta) {
+        botao.classList.add("correta");
+      }
+    });
+
+    const feedback = document.getElementById("feedback");
+
+    if (acertou) {
+      pontosDaAventura += 10;
+
+      feedback.innerHTML =
+        "<strong>Resposta correta! +10 pontos</strong><br>";
+    } else {
+      botaoEscolhido.classList.add("errada");
+
+      feedback.innerHTML =
+        "<strong>Não foi dessa vez!</strong><br>" +
+        "A resposta correta está destacada. Continue investigando!";
+    }
+
+    const explicacao = document.createElement("p");
+    explicacao.textContent = questao.explicacao;
+    feedback.appendChild(explicacao);
+
+    document.getElementById("pontuacao").textContent =
+      pontosDaAventura;
+
+    feedback.classList.remove("escondido");
+
+    const ehUltimaPergunta =
+      indiceMissao === missoes.length - 1 &&
+      indicePergunta === missoes[indiceMissao].perguntas.length - 1;
+
+    document.getElementById("botaoContinuar").textContent =
+      ehUltimaPergunta ? "CONCLUIR A AVENTURA" : "PRÓXIMO DESAFIO";
+
+    document.getElementById("botaoContinuar").classList.remove("escondido");
+  }
+
+  function proximaPergunta() {
+    if (!respondida) return;
+
+    const perguntasDaMissao = missoes[indiceMissao].perguntas;
+
+    if (indicePergunta < perguntasDaMissao.length - 1) {
+      indicePergunta++;
+      mostrarPergunta();
+      return;
+    }
+
+    if (indiceMissao < missoes.length - 1) {
+      indiceMissao++;
+      indicePergunta = 0;
+      mostrarPergunta();
+      return;
+    }
+
+    concluirAventura();
+  }
+
+  function concluirAventura() {
+    const jaConcluida =
+      localStorage.getItem("terrasGrandesQuestoesConcluida") === "sim";
+
+    const pontosJaAdicionados =
+      localStorage.getItem("terrasPontosAdicionados") === "sim";
+
+    let pontosTotais = Number(
+      localStorage.getItem("pontosFilosofia") || 0
+    );
+
+    // Os pontos desta região são adicionados ao total apenas uma vez.
+    if (!pontosJaAdicionados) {
+      pontosTotais += pontosDaAventura;
+
+      localStorage.setItem(
+        "pontosFilosofia",
+        String(pontosTotais)
+      );
+
+      localStorage.setItem("terrasPontosAdicionados", "sim");
+    }
+
+    localStorage.setItem("terrasGrandesQuestoesConcluida", "sim");
+
+    document.getElementById("painelDesafio").classList.add("escondido");
+    document.getElementById("conclusao").classList.remove("escondido");
+
+    document.getElementById("barraProgresso").style.width = "100%";
+
+    document.getElementById("resultadoFinal").textContent =
+      "Você acertou " + (pontosDaAventura / 10) + " de " +
+      totalPerguntas + " perguntas e conquistou " +
+      pontosDaAventura + " pontos nesta aventura. " +
+      "Seu total de pontos registrados é " + pontosTotais + ".";
+
+    const mensagem = document.getElementById("mensagemFinal");
+
+    if (pontosDaAventura === totalPerguntas * 10) {
+      mensagem.textContent =
+        "Excelente! Você demonstrou atenção e domínio dos conceitos apresentados.";
+    } else if (pontosDaAventura >= 50) {
+      mensagem.textContent =
+        "Muito bem! Você avançou bastante. Releia as explicações das questões que errou para fortalecer seu conhecimento.";
+    } else {
+      mensagem.textContent =
+        "Toda jornada ensina alguma coisa. Você pode rever as explicações e tentar novamente para praticar os conceitos.";
+    }
+
+    if (jaConcluida) {
+      mensagem.textContent +=
+        " Esta região já estava concluída no seu progresso.";
+    }
+
+    if (pontosJaAdicionados) {
+      mensagem.textContent +=
+        " Os pontos desta região já haviam sido contabilizados anteriormente e não foram adicionados novamente.";
+    }
+  }
+
+  function voltarAoMapa() {
+    window.location.href = "mapa.html";
+  }
+</script>
+
+</body>
+</html>
+```

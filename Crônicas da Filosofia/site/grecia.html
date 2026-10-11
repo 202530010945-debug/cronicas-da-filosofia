@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grécia Antiga | Crônicas da Filosofia</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:Georgia,"Times New Roman",serif;color:#f6edda;background:linear-gradient(rgba(8,13,31,.84),rgba(8,13,31,.96)),radial-gradient(ellipse at top,#52678b,#10172d 65%)}
+header{text-align:center;padding:30px 16px 22px;border-bottom:1px solid #bda66b;background:#080d1fcc}
+.marca{color:#d9bd78;letter-spacing:3px;font-size:12px;text-transform:uppercase}
+h1{font-size:clamp(30px,6vw,48px);margin:12px 0;color:#f1d99b}
+header p{color:#d1d3df}
+main{width:min(900px,92%);margin:30px auto}
+.painel{border:1px solid #88784f;border-radius:16px;padding:24px;margin-bottom:22px;background:#141b31e0;box-shadow:0 12px 35px #0004}
+.etiqueta{color:#e2c780;font-size:12px;letter-spacing:2px;text-transform:uppercase}
+h2{color:#f1d99b;margin-top:10px}
+p{line-height:1.7}
+.status{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+.status span{border:1px solid #5c6682;border-radius:8px;padding:9px 12px;background:#111a32;color:#e9e0cc;font-size:14px}
+.dialogo{border-left:3px solid #d9bd78;padding:4px 0 4px 17px;margin:20px 0;color:#e0dfeb}
+.opcoes{display:grid;gap:12px;margin-top:20px}
+button{font-family:inherit;font-size:16px;cursor:pointer;border-radius:9px;padding:14px 16px;transition:.2s}
+.opcao{text-align:left;color:#f5edda;background:#202b49;border:1px solid #596887}
+.opcao:hover:not(:disabled){background:#354362;border-color:#e0c47d;transform:translateY(-1px)}
+button:disabled{cursor:default;opacity:.8}
+.principal{color:#171626;background:#e0c47d;border:1px solid #f4dfa5;font-weight:bold}
+.principal:hover{background:#f2d994}
+.secundario{color:#eee4ce;background:transparent;border:1px solid #8a8fa4}
+.feedback{display:none;padding:15px;border-radius:9px;margin-top:18px;line-height:1.6;background:#111a32;border:1px solid #5c6682}
+.feedback.visivel{display:block}
+.dica-box{margin:14px 0;padding:13px;border:1px dashed #d9bd78;border-radius:9px;background:#0e172a;color:#f0dfae;line-height:1.6}
+.dica-box button{margin-top:8px;padding:9px 12px;font-size:14px}
+.dica-texto{margin-top:8px}
+.barra-fundo{height:9px;background:#303953;border-radius:20px;overflow:hidden;margin-top:12px}
+.barra{height:100%;width:0;background:#e0c47d;transition:width .3s}
+.acoes{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.oculto{display:none}
+.rodape{text-align:center;color:#aeb5c9;font-size:13px;padding:10px 15px 30px}
+@media(max-width:500px){.painel{padding:18px}.acoes button{width:100%}}
+</style>
+</head>
+<body>
+<header>
+  <div class="marca">Crônicas da Filosofia</div>
+  <h1>🏛️ Grécia Antiga</h1>
+  <p>Região I — O Despertar da Filosofia</p>
+</header>
+
+<main>
+  <section class="painel">
+    <div class="etiqueta">Seu personagem</div>
+    <h2 id="nomeJogador">Viajante</h2>
+    <p>Uma tempestade assusta os moradores. Investigue os acontecimentos e descubra como as perguntas podem transformar nossa compreensão do mundo.</p>
+    <div class="status">
+      <span>⭐ Pontos desta aventura: <strong id="pontos">0</strong></span>
+      <span>📜 Etapa: <strong id="etapaAtual">Prólogo</strong></span>
+    </div>
+    <div class="barra-fundo"><div class="barra" id="barraProgresso"></div></div>
+  </section>
+
+  <section class="painel" id="painelAventura">
+    <div class="etiqueta" id="tipoEtapa">Prólogo — O presságio</div>
+    <h2 id="tituloEtapa">⚡ A cidade sob a tempestade</h2>
+    <p id="textoEtapa"></p>
+    <div class="dialogo" id="dialogo"></div>
+    <div id="areaPergunta" class="oculto">
+      <p id="enunciado"></p>
+      <div id="areaDica" class="dica-box oculto" aria-live="polite"></div>
+      <div class="opcoes" id="opcoes"></div>
+      <div class="feedback" id="feedback" aria-live="polite"></div>
+    </div>
+    <div class="acoes">
+      <button class="principal" id="botaoContinuar">INVESTIGAR A TEMPESTADE →</button>
+    </div>
+  </section>
+
+  <section class="painel oculto" id="painelFinal">
+    <div class="etiqueta">Missão concluída</div>
+    <h2>✨ O primeiro passo do filósofo</h2>
+    <p id="resumoFinal"></p>
+    <p>Você aprendeu que filosofar envolve questionar, investigar e buscar boas razões. Os primeiros filósofos gregos procuraram explicações racionais para a natureza. Hoje, a ciência explica que o trovão é o som produzido pelo rápido aquecimento e expansão do ar provocado por um raio.</p>
+    <div class="status">
+      <span>⭐ Pontos conquistados: <strong id="pontosFinais">0</strong></span>
+    </div>
+    <div class="acoes">
+      <button class="principal" id="voltarMapa">VOLTAR AO MAPA</button>
+      <button class="secundario" id="recomecar">JOGAR NOVAMENTE</button>
+    </div>
+  </section>
+</main>
+
+<div class="rodape">Cada pergunta é uma oportunidade de pensar. Cada ideia pode abrir um novo caminho.</div>
+
+<script>
+const nome = localStorage.getItem("nomeJogador") || "Viajante";
+document.getElementById("nomeJogador").textContent = nome;
+
+const dicas = [
+  "Não confunda popularidade com verdade. Pense em qual atitude investiga a explicação em vez de aceitá-la automaticamente.",
+  "Lembre-se: mito é uma narrativa tradicional; logos envolve discurso, razão e busca por explicações fundamentadas.",
+  "Observe a relação entre o raio e o som que ouvimos depois. A resposta correta envolve um fenômeno físico, não uma ação sobrenatural."
+];
+
+const missoes = [
+  {
+    tipo:"Desafio 1 — O medo dos moradores",
+    titulo:"Os deuses estão furiosos?",
+    texto:"Você acaba de chegar a uma cidade da Grécia Antiga. O céu escurece, o vento sacode as árvores e um clarão ilumina as ruas. Um trovão ecoa sobre os telhados. Os moradores correm assustados. Um deles afirma que Zeus está furioso e que a tempestade é um castigo.",
+    dialogo:"Morador: “Não questione! Os deuses estão furiosos. Essa é a única explicação possível!”",
+    pergunta:"O que você decide fazer?",
+    opcoes:[
+      "Concordar imediatamente, porque muitas pessoas acreditam nisso.",
+      "Investigar o fenômeno e questionar se existem outras explicações.",
+      "Dizer que a tempestade não tem nenhuma causa.",
+      "Inventar uma criatura invisível para explicar os trovões."
+    ],
+    correta:1,
+    explicacao:"A atitude filosófica começa quando questionamos explicações e procuramos razões. Não precisamos aceitar uma ideia só porque muitas pessoas acreditam nela.",
+    pontos:10
+  },
+  {
+    tipo:"Desafio 2 — O encontro com Sofia",
+    titulo:"Mito e Logos",
+    texto:"Você procura abrigo e encontra Sofia, guardiã do conhecimento. Ela escuta o relato dos moradores e explica que os mitos ofereciam narrativas tradicionais para compreender o mundo. Alguns pensadores gregos começaram a buscar explicações racionais para os fenômenos naturais.",
+    dialogo:"Sofia: “Não basta repetir o que ouvimos. Precisamos perguntar, observar e procurar razões. Essa busca ajuda a abrir caminho para o logos.”",
+    pergunta:"Qual alternativa explica melhor a diferença entre mito e logos?",
+    opcoes:[
+      "Mito é sempre uma mentira, e logos significa apenas fazer contas.",
+      "Mito é uma narrativa tradicional; logos está ligado ao discurso e à busca de explicações racionais.",
+      "Mito e logos significam exatamente a mesma coisa.",
+      "Logos é aceitar qualquer explicação sem fazer perguntas."
+    ],
+    correta:1,
+    explicacao:"Mito é uma narrativa tradicional usada para explicar o mundo. Logos está relacionado à razão, ao discurso e à argumentação. Essa transformação foi gradual: os mitos não desapareceram de repente.",
+    pontos:10
+  },
+  {
+    tipo:"Desafio 3 — O segredo do trovão",
+    titulo:"Investigar a natureza",
+    texto:"Sofia aponta para o céu. Um clarão ilumina as nuvens e, alguns segundos depois, chega o estrondo. Ela explica que podemos investigar os fenômenos naturais por meio de observações, perguntas e evidências.",
+    dialogo:"Sofia: “Os antigos não conheciam toda a ciência que temos hoje. Mas podemos continuar a investigação usando observações e boas perguntas.”",
+    pergunta:"Qual explicação científica descreve corretamente a origem do trovão?",
+    opcoes:[
+      "É o som produzido quando um deus movimenta as nuvens.",
+      "É um ruído sem relação com os raios.",
+      "É o som causado pelo rápido aquecimento e expansão do ar provocado por um raio.",
+      "É o vento batendo nas colunas dos templos."
+    ],
+    correta:2,
+    explicacao:"Correto! O raio aquece intensamente o ar ao redor, que se expande rapidamente e gera ondas sonoras: o trovão. A Filosofia incentivou a busca de explicações racionais; a explicação física do fenômeno é estudada pela ciência.",
+    pontos:10
+  }
+];
+
+let etapa = -1;
+let pontosDaAventura = 0;
+let respondeu = false;
+
+const tipoEtapa = document.getElementById("tipoEtapa");
+const tituloEtapa = document.getElementById("tituloEtapa");
+const textoEtapa = document.getElementById("textoEtapa");
+const dialogo = document.getElementById("dialogo");
+const areaPergunta = document.getElementById("areaPergunta");
+const enunciado = document.getElementById("enunciado");
+const opcoes = document.getElementById("opcoes");
+const feedback = document.getElementById("feedback");
+const botaoContinuar = document.getElementById("botaoContinuar");
+const painelAventura = document.getElementById("painelAventura");
+const painelFinal = document.getElementById("painelFinal");
+
+function atualizarStatus(){
+  document.getElementById("pontos").textContent = pontosDaAventura;
+  document.getElementById("etapaAtual").textContent =
+    etapa < 0 ? "Prólogo" : `${Math.min(etapa+1,missoes.length)}/${missoes.length}`;
+  document.getElementById("barraProgresso").style.width =
+    `${Math.max(0,(etapa+1)/(missoes.length+1)*100)}%`;
+}
+
+function mostrarIntroducao(){
+  tipoEtapa.textContent = "Prólogo — O presságio";
+  tituloEtapa.textContent = "⚡ A cidade sob a tempestade";
+  textoEtapa.textContent =
+    "Você acaba de chegar a uma antiga cidade grega. Nuvens pesadas cobrem os templos, o vento sacode as árvores e um clarão ilumina as ruas. Segundos depois, um estrondo ensurdecedor ecoa pelo céu. Um trovão! Os moradores correm assustados, tentando descobrir o que despertou aquela tempestade.";
+  dialogo.textContent =
+    "Morador: “São os deuses! Alguém deve tê-los enfurecido! Precisamos descobrir o que fizemos antes que algo terrível aconteça!”";
+  areaPergunta.classList.add("oculto");
+  botaoContinuar.disabled = false;
+  botaoContinuar.textContent = "INVESTIGAR A TEMPESTADE →";
+  atualizarStatus();
+}
+
+function mostrarMissao(){
+  respondeu = false;
+  const missao = missoes[etapa];
+  tipoEtapa.textContent = missao.tipo;
+  tituloEtapa.textContent = missao.titulo;
+  textoEtapa.textContent = missao.texto;
+  dialogo.textContent = missao.dialogo;
+  enunciado.textContent = missao.pergunta;
+  opcoes.innerHTML = "";
+  const areaDica = document.getElementById("areaDica");
+  if (localStorage.getItem("dicasAtivas") !== "nao") {
+    areaDica.classList.remove("oculto");
+    areaDica.innerHTML = '<strong>💡 Dica filosófica</strong><br><button type="button" class="secundario" id="mostrarDica">Revelar dica</button><div class="dica-texto oculto" id="textoDica"></div>';
+    document.getElementById("mostrarDica").addEventListener("click", () => {
+      const textoDica = document.getElementById("textoDica");
+      textoDica.textContent = dicas[etapa];
+      textoDica.classList.remove("oculto");
+      document.getElementById("mostrarDica").textContent = "Dica revelada";
+      document.getElementById("mostrarDica").disabled = true;
+    });
+  } else {
+    areaDica.classList.add("oculto");
+    areaDica.textContent = "";
+  }
+  feedback.className = "feedback";
+  feedback.textContent = "";
+  areaPergunta.classList.remove("oculto");
+  botaoContinuar.textContent =
+    etapa === missoes.length-1 ? "CONCLUIR A INVESTIGAÇÃO →" : "PRÓXIMO DESAFIO →";
+  botaoContinuar.disabled = true;
+
+  missao.opcoes.forEach((opcao,indice)=>{
+    const botao = document.createElement("button");
+    botao.className = "opcao";
+    botao.textContent = `${String.fromCharCode(65+indice)}) ${opcao}`;
+    botao.addEventListener("click",()=>responder(indice));
+    opcoes.appendChild(botao);
+  });
+  atualizarStatus();
+}
+
+function responder(indice){
+  if(respondeu) return;
+  respondeu = true;
+  const missao = missoes[etapa];
+  const botoes = opcoes.querySelectorAll("button");
+
+  botoes.forEach((botao,i)=>{
+    botao.disabled = true;
+    if(i===missao.correta) botao.style.borderColor = "#82c995";
+    if(i===indice && i!==missao.correta) botao.style.borderColor = "#d58c8c";
+  });
+
+  if(indice===missao.correta){
+    pontosDaAventura += missao.pontos;
+    feedback.textContent = "✅ Resposta correta! "+missao.explicacao+
+      ` Você ganhou ${missao.pontos} pontos.`;
+  }else{
+    feedback.textContent = "📚 Ainda não! "+missao.explicacao;
+  }
+  feedback.classList.add("visivel");
+  botaoContinuar.disabled = false;
+  atualizarStatus();
+}
+
+function concluirAventura(){
+  const pontosAnteriores = Number(localStorage.getItem("pontosFilosofia")||0);
+  localStorage.setItem("pontosFilosofia",String(pontosAnteriores+pontosDaAventura));
+  localStorage.setItem("regiaoGreciaConcluida","sim");
+  localStorage.setItem("missao1Concluida","sim");
+
+  painelAventura.classList.add("oculto");
+  painelFinal.classList.remove("oculto");
+  document.getElementById("pontosFinais").textContent = pontosDaAventura;
+  document.getElementById("resumoFinal").textContent =
+    `${nome}, você concluiu a investigação da tempestade e conquistou ${pontosDaAventura} pontos nesta aventura.`;
+  document.getElementById("barraProgresso").style.width = "100%";
+  document.getElementById("etapaAtual").textContent = "Concluída";
+}
+
+botaoContinuar.addEventListener("click",()=>{
+  if(etapa===-1){
+    etapa=0;
+    mostrarMissao();
+  }else if(etapa<missoes.length-1){
+    etapa++;
+    mostrarMissao();
+  }else{
+    concluirAventura();
+  }
+});
+
+document.getElementById("voltarMapa").addEventListener("click",()=>{
+  window.location.href = "mapa.html";
+});
+
+document.getElementById("recomecar").addEventListener("click",()=>{
+  etapa=-1;
+  pontosDaAventura=0;
+  painelFinal.classList.add("oculto");
+  painelAventura.classList.remove("oculto");
+  mostrarIntroducao();
+});
+
+mostrarIntroducao();
+</script>
+</body>
+</html>
