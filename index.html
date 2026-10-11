@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crônicas da Filosofia</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: #f7e8c4;
+      font-family: Georgia, serif;
+      background: #080d19;
+    }
+
+    .tela-inicial {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        linear-gradient(90deg, rgba(4,8,16,.30) 0%, rgba(4,8,16,.36) 38%, rgba(4,8,16,.30) 75%, rgba(4,8,16,.35) 100%),
+        linear-gradient(0deg, rgba(4,8,16,.58) 0%, transparent 55%),
+        url("cenario-viajante.png") center / cover no-repeat,
+        radial-gradient(ellipse at 70% 30%, #344b70, #080d19 75%);
+    }
+
+    .tela-inicial::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px solid #c9a6538c;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .brilho {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(65px);
+      opacity: .24;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .brilho-1 {
+      width: 220px;
+      height: 220px;
+      background: #c9a227;
+      top: 10%;
+      right: 20%;
+    }
+
+    .brilho-2 {
+      width: 260px;
+      height: 260px;
+      background: #325b91;
+      bottom: 0;
+      left: 10%;
+    }
+
+    .brilho-3 {
+      width: 120px;
+      height: 120px;
+      background: #e7c977;
+      top: 45%;
+      right: 8%;
+    }
+
+    .titulo {
+      width: min(100%, 580px);
+      margin: 0 auto;
+      padding: 25px clamp(0px, 3vw, 28px);
+      animation: surgir 1s ease both;
+      position: relative;
+      z-index: 1;
+    }
+
+    .selo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #d8b65a;
+      font-size: 11px;
+      letter-spacing: 4px;
+      margin-bottom: 25px;
+    }
+
+    .selo::before, .selo::after {
+      content: "";
+      width: 35px;
+      height: 1px;
+      background: #c9a653;
+    }
+
+    h1 {
+      margin: 0;
+      color: #f5e4b6;
+      font-size: clamp(42px, 7vw, 78px);
+      line-height: .98;
+      letter-spacing: 2px;
+      text-shadow: 0 4px 25px #000;
+    }
+
+    h1 span {
+      color: #d7b65e;
+    }
+
+    .ornamento {
+      color: #c9a653;
+      margin: 25px 0 17px;
+      letter-spacing: 8px;
+      font-size: 16px;
+    }
+
+    .frase {
+      max-width: 390px;
+      color: #d0c9ba;
+      font-size: 17px;
+      font-style: italic;
+      line-height: 1.8;
+      margin: 0 0 32px;
+    }
+
+    .menu-jogo {
+      width: min(100%, 320px);
+      display: grid;
+      gap: 12px;
+    }
+
+    .menu-jogo button {
+      min-height: 50px;
+      padding: 14px 18px;
+      border: 1px solid #b9953e;
+      border-radius: 3px;
+      background: linear-gradient(100deg, rgba(5,10,19,.96), rgba(16,23,39,.92));
+      box-shadow: inset 0 0 0 1px rgba(201,166,83,.12), 0 8px 22px rgba(0,0,0,.28);
+      color: #f0d68d;
+      font-family: Georgia, serif;
+      font-size: 12px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: .25s ease;
+    }
+
+    .menu-jogo button:first-child {
+      color: #10101a;
+      background: linear-gradient(110deg, #b58a32, #f1d98f, #b58a32);
+      font-weight: bold;
+    }
+
+    .menu-jogo button:hover {
+      transform: translateX(5px);
+      box-shadow: 0 0 22px #c9a65338;
+      border-color: #ffe7a1;
+    }
+
+    .rodape {
+      position: absolute;
+      bottom: 27px;
+      left: 20px;
+      right: 20px;
+      text-align: center;
+      color: #9c9a9b;
+      font: 10px Arial, sans-serif;
+      letter-spacing: 3px;
+    }
+
+    @keyframes surgir {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .tela-inicial {
+      background:
+  linear-gradient(
+    90deg,
+    rgba(4, 8, 16, 0.15),
+    rgba(4, 8, 16, 0.30)
+  ),
+  url("cenario-viajante.png") center center / cover no-repeat;
+      }
+
+      .titulo { padding: 20px 8px 45px; margin: 0 auto; }
+      .menu-jogo { margin-left: auto; margin-right: auto; }
+      .selo { letter-spacing: 2px; font-size: 9px; }
+      .frase { font-size: 15px; }
+      .rodape { font-size: 8px; letter-spacing: 2px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="tela-inicial">
+    <div class="brilho brilho-1"></div>
+    <div class="brilho brilho-2"></div>
+    <div class="brilho brilho-3"></div>
+
+    <section class="titulo">
+      <p class="selo">UMA JORNADA PELO MUNDO DAS IDEIAS</p>
+
+      <h1>CRÔNICAS<br>DA <span>FILOSOFIA</span></h1>
+
+      <p class="ornamento">✦ ───── ✧ ───── ✦</p>
+
+      <p class="frase">
+        Grandes ideias. Grandes jornadas.<br>Qual será o seu próximo passo?
+      </p>
+
+      <div class="menu-jogo">
+        <button id="novo-jogo">NOVO JOGO</button>
+        <button id="continuar">CONTINUAR</button>
+        <button id="capitulos">MAPA DO MUNDO</button>
+        <button id="configuracoes" type="button">CONFIGURAÇÕES</button>
+        <button id="sair" type="button">SAIR</button>
+      </div>
+    </section>
+
+    <p class="rodape">“A filosofia começa com a dúvida.” — Sócrates</p>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    document.getElementById("configuracoes")?.addEventListener("click", function () {
+      alert("As configurações serão adicionadas em uma próxima etapa.");
+    });
+    document.getElementById("sair")?.addEventListener("click", function () {
+      if (confirm("Deseja voltar à tela inicial?")) {
+        window.location.href = "index.html";
+      }
+    });
+  </script>
+</body>
+</html>
